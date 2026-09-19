@@ -1,0 +1,25 @@
+category,instance,trajectory,r1,r2,r3,r4,r5,mean_progress
+Hammer,Claw,Swing down,100,100,100,100,100,100.00
+Hammer,Claw,Swing side,100,100,77.5,100,100,95.50
+Hammer,Mallet,Swing down,100,100,33.3,100,88.9,84.44
+Hammer,Mallet,Swing side,65.6,81.3,100,78.1,62.5,77.50
+Marker,Sharpie,Draw smile,100,100,100,100,0,80.00
+Marker,Sharpie,Write C,100,100,100,32,56,77.60
+Marker,Staples,Draw smile,100,53.1,100,100,100,90.62
+Marker,Staples,Write C,31,0,100,100,100,66.20
+Eraser,Handle,Wipe smile,100,100,100,100,100,100.00
+Eraser,Handle,Wipe C,100,100,100,100,100,100.00
+Eraser,Flat,Wipe smile,100,100,100,100,100,100.00
+Eraser,Flat,Wipe C,100,100,100,100,100,100.00
+Brush,Blue,Sweep forward,47.8,47.8,40,60,60,51.12
+Brush,Blue,Sweep right,100,100,100,100,100,100.00
+Brush,Red,Sweep forward,100,100,13.5,100,100,82.70
+Brush,Red,Sweep right,43.2,62.2,100,42.2,59.5,61.42
+Spatula,Spoon,Serve plate,100,76.5,100,48.5,100,85.00
+Spatula,Spoon,Flip over,77.5,100,100,100,100,95.50
+Spatula,Flat,Serve plate,100,75,78.1,56.3,78.1,77.50
+Spatula,Flat,Flip over,0,52.2,0,78.3,100,46.10
+Screwdriver,Long,Spin vertical,20.9,72.1,53.5,74.4,58.1,55.80
+Screwdriver,Long,Spin horizontal,48.4,86.7,83.3,3.3,86.7,61.68
+Screwdriver,Short,Spin vertical,15.4,61.5,12.8,100,0,37.94
+Screwdriver,Short,Spin horizontal,100,100,100,77.8,0,75.56
