@@ -1,6 +1,6 @@
 # SimToolReal Research Seminar
 
-English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 23 slides, plus 2 backup slides. Suggested length: 30–35 minutes including videos, plus discussion.
+English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 24 slides, plus 2 backup slides. Suggested length: 32–37 minutes including videos, plus discussion.
 
 The methodology-focused narrative starts with an open brainstorm, then examines demonstration bottlenecks. It restores the animated 6D pose sequence and explains simulation training before real deployment. The LSTM discussion covers observations, recurrent memory and arm/hand action processing. A simulation video leads into the gap between simulator ground truth and real state estimation. Six tool categories provide qualitative evidence, followed by one numerical overview and a combined discussion of three research directions.
 
@@ -13,14 +13,14 @@ The methodology-focused narrative starts with an open brainstorm, then examines 
 - [Chinese slide-matched presentation script](speaker_notes_zh.md).
 - [Detailed paper reading and narrative assessment (Chinese)](paper/narrative_assessment_zh.md).
 - [Published per-rollout data transcribed from Table II](paper/real_world_results.csv).
-- Editable diagrams: [simulation pipeline](assets/simulation_pipeline.svg), [LSTM memory](assets/lstm_memory.svg), [real deployment](assets/deployment_pipeline.svg).
+- Editable diagrams: [simulation pipeline](assets/simulation_pipeline.svg), [SAPG split–aggregate](assets/sapg.svg), [LSTM memory](assets/lstm_memory.svg), [real deployment](assets/deployment_pipeline.svg).
 - [Combined system overview from the previous revision](assets/system_architecture.svg), retained as a reference asset.
 
 No web connection is required to present the HTML deck. Keep `slides.html`, `assets/` and `index.html` together. The ZIP preserves this structure. If local-file media is restricted by your browser, serve this directory using any local static-file server.
 
 ## Controls
 
-Right / Space advances a build or a slide. Left reverses a build. `A` reveals the current slide. `F` enters fullscreen. `V` plays or pauses the selected video. On paired tool pages, click the desired tool's play button first. Selecting another video pauses the previous one. Videos never autoplay and pause when leaving their slide. Native controls, including video fullscreen, remain available. Click a paper figure to enlarge; Escape closes it. The bottom toolbar appears on hover.
+Right / Space advances a build or a slide. Left reverses a build. `A` reveals the current slide. `F` enters fullscreen. `V` plays or pauses the selected video. On paired tool pages, click the desired tool's play button first. Selecting another video pauses the previous one. Content videos never autoplay and pause when leaving their slide; only the silent cover montage loops automatically. Native controls, including video fullscreen, remain available. Click a paper figure to enlarge; Escape closes it. The bottom toolbar appears on hover.
 
 The cover automatically loops a silent 10-second montage assembled from the official brush, hammer, marker and spatula experiments. The main talk uses nine silent author-provided clips at original speed: simulation, inference, brush, hammer, marker, eraser, spatula, screwdriver and recovery. The earlier difficulty clip remains as an optional asset. Original source links and the cover transformation are documented in `assets/videos/README.md`. The category montages illustrate behavior and are not random evaluation samples. PDF uses a four-tool poster frame because it cannot play videos.
 
@@ -28,11 +28,11 @@ The cover automatically loops a silent 10-second montage assembled from the offi
 
 - 1–3: cover, open brainstorm and demonstration bottlenecks.
 - 4–5: pose-reaching abstraction and animated position/orientation sequence.
-- 6–12: simulation-only pipeline, procedural tools, exact reward construction, policy observations, LSTM memory, action processing and simulation video.
-- 13–16: ground-truth-to-estimation transition, real pipeline, event-driven goals and inference video.
-- 17–21: six-category video gallery, one quantitative overview, recovery and scope.
-- 22–23: the three research inspirations together and closing question.
-- 24–25: RL ablations and references. The pose metric is integrated into the reward-construction page.
+- 6–13: simulation-only pipeline, two-step SAPG explanation, procedural tools, exact reward construction, policy observations, LSTM memory, action processing and simulation video.
+- 14–17: ground-truth-to-estimation transition, real pipeline, event-driven goals and inference video.
+- 18–22: six-category video gallery, one quantitative overview, recovery and scope.
+- 23–24: the three research inspirations together and closing question.
+- 25–26: RL ablations and references. The pose metric is integrated into the reward-construction page.
 
 ## Content boundaries
 

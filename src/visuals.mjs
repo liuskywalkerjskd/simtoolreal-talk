@@ -16,6 +16,23 @@ export function simPipeline(){return svg(
  `<path d="M175 55V43H960V55" fill="none" stroke="${T}" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arr)"/>`+
  txt(720,328,'SAPG updates the policy using simulated experience',22,T,'middle')+txt(720,362,'Critic supports training only',20,M,'middle'),1),390);}
 
+export function sapg(){const xs=[170,430,690,950];
+ const split=txt(28,25,'1  SPLIT',15,T)+txt(126,25,'Divide parallel simulation across policies with different exploration strengths',18,M)+
+ rect(40,48,1040,55,'#f1f5f3')+txt(560,81,'Massively parallel simulator: N environments',22,T,'middle')+
+ xs.map((x,i)=>line(x,103,x,132,T,true)+rect(x-92,144,184,66,i===0?S:'#f1f5f3')+
+ txt(x,171,i===0?'Leader  π₁':i===3?'Follower  πM':'Follower  π'+(i+1),22,T,'middle')+
+ txt(x,194,i===0?'balanced exploration':i===1?'lower entropy':i===2?'higher entropy':'diverse exploration',16,M,'middle')+
+ line(x,210,x,234,T,true)+rect(x-50,246,100,38,'#ffffff',T)+txt(x,272,'Data  D'+(i===3?'M':i+1),18,T,'middle')).join('');
+ const aggregate=txt(28,321,'2  AGGREGATE',15,T)+
+ `<path d="M170 285V342H435" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ `<path d="M430 285V322H500V342" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ `<path d="M690 285V322H620V342" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ `<path d="M950 285V342H685" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ txt(300,333,'D₁: own on-policy data',15,M,'middle')+txt(824,333,'D₂ … Dₘ: importance-weighted',15,M,'middle')+
+ rect(435,355,250,58,S)+txt(560,382,'PPO-style leader update',21,T,'middle')+txt(560,403,'on-policy + aggregated data',16,M,'middle')+
+ line(560,415,560,434,T,true)+txt(560,463,'Deploy leader policy  π₁',22,T,'middle');
+ return svg(g(split,1)+g(aggregate,2),480);}
+
 export function memory(){let s=txt(28,22,'THE SAME RECURRENT NETWORK AT EVERY CONTROL STEP',15,M);[190,550,910].forEach((x,i)=>{
  const step=i===0?'t − 1':i===1?'t':'t + 1';
  const recurrent=i===1?'hₜ₋₁, cₜ₋₁':'hₜ, cₜ';

@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.2.0] - 2026-09-20
+
+### Features
+
+- Add a main-talk SAPG explainer immediately after the simulation training pipeline.
+- Use two reveals to separate environment and policy splitting from importance-weighted experience aggregation.
+- Add an editable SAPG diagram and matching English and Chinese speaker notes.
+
+### Design Rationale
+
+- Explain the optimizer when it first appears instead of leaving SAPG as an unexplained acronym.
+- Keep the visual focused on the leader–follower data flow rather than reproducing the full algorithm pseudocode.
+
+### Notes & Caveats
+
+- The diagram is schematic: π₁ through πM denotes a general policy population, not the literal number of boxes drawn.
+- SAPG retains PPO-style actor–critic updates; the new slide focuses on exploration and data reuse.
+- The deck now contains 24 main slides and 2 backup slides.
+
 ## [3.1.0] - 2026-09-20
 
 ### Features

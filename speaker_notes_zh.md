@@ -1,6 +1,6 @@
 # SimToolReal 中文逐页汇报稿
 
-建议时长：正文 30–35 分钟（含视频），另加讨论。第 1–23 页为正文，第 24–25 页为备份。每页均与 slides.html 的页码和英文标题严格对应。
+建议时长：正文 32–37 分钟（含视频），另加讨论。第 1–24 页为正文，第 25–26 页为备份。每页均与 slides.html 的页码和英文标题严格对应。
 
 ## 1. SimToolReal：从工具运动到机器人技能
 
@@ -82,7 +82,23 @@
 
 **操作提示：** 按动画顺序先讲环境闭环，再揭示 asymmetric critic。
 
-## 7. 程序化工具覆盖几何与质量变化
+## 7. SAPG：拆分探索，再聚合经验
+
+**对应英文标题：** SAPG splits exploration and aggregates experience
+
+**建议时间：** 约 100 秒
+
+SAPG 的全称是 Split and Aggregate Policy Gradients，可以把它理解成面向大规模并行仿真的 PPO 扩展。它没有替换 actor-critic 框架，主要改变的是如何组织探索数据，以及 leader policy 怎样复用这些数据。
+
+第一步是 Split。把大量并行环境分给一个 leader policy 和多个 follower policies。不同 follower 使用不同强度的 entropy regularization，因此它们会形成不同的 exploration-exploitation 行为。有些策略更倾向于稳定利用当前解，有些策略会尝试更分散的动作。每个策略在自己的环境 block 中采集数据，followers 仍然使用自己的 on-policy 数据执行常规 PPO 更新。图里只画了几个代表性的 policy block，π₁ 到 πM 表示一般的策略 population，并不表示系统一定只有四个策略。
+
+第二步是 Aggregate。Leader 使用自己的 on-policy 数据，同时从 follower datasets 中采样经验。由于这些轨迹并不是 leader 自己生成的，所以属于 off-policy experience，需要通过 importance weighting 修正策略分布差异。最终部署的是聚合后更新的 leader policy。
+
+直观上，普通 PPO 像一个探索者同时运行很多环境；SAPG 则让一组探索风格不同的策略分别寻找可行行为，再让 leader 吸收更广泛的经验。它适合这里的原因是灵巧手动作维度高、接触行为难探索，而且仿真一次可以并行运行上万个环境。
+
+**操作提示：** 第一次前进键展示 Split：并行环境分配给 leader 和 followers；第二次展示 Aggregate：followers 的经验经过 importance weighting 汇入 leader update。
+
+## 8. 程序化工具覆盖几何与质量变化
 
 **对应英文标题：** Procedural tools cover shape and mass variation
 
@@ -94,7 +110,7 @@
 
 **操作提示：** 指出图中的小工具只是分布示意，不是论文资产的逐一复刻。
 
-## 8. RL 训练信号：每个 Reward 如何构造
+## 9. RL 训练信号：每个 Reward 如何构造
 
 **对应英文标题：** RL training signal: how each reward term is constructed
 
@@ -114,7 +130,7 @@
 
 **操作提示：** 共四次揭示：1 smooth；2 grasp；3 goal 和 pose distance；4 最下方 reward 与 actor–critic objective 的区别。
 
-## 9. 策略观察紧凑的 Object-Centric State
+## 10. 策略观察紧凑的 Object-Centric State
 
 **对应英文标题：** The policy observes a compact, object-centric state
 
@@ -128,7 +144,7 @@ actor 不接收完整 mesh、显式质量、惯量或 privileged object velocity
 
 **操作提示：** 可以用“机器人自身—当前工具—当前目标”三层来口头归纳输入。
 
-## 10. LSTM 用历史信息补足部分可观测性
+## 11. LSTM 用历史信息补足部分可观测性
 
 **对应英文标题：** LSTM memory carries interaction history across steps
 
@@ -146,7 +162,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 前两次前进键展开 t 和 t+1；第三次解释 cell state；第四次解释 hidden state；第五次强调它们是历史摘要，而不是原始历史帧堆叠。
 
-## 11. Action Head 对手臂与手指采用不同控制方式
+## 12. Action Head 对手臂与手指采用不同控制方式
 
 **对应英文标题：** The action head controls the arm and hand differently
 
@@ -160,7 +176,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 先比较 incremental 与 absolute target，再揭示 EMA 和 fixed weights。
 
-## 12. 仿真效果：到达多样工具位姿
+## 13. 仿真效果：到达多样工具位姿
 
 **对应英文标题：** Simulation: reaching diverse tool poses
 
@@ -172,7 +188,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 播放 training 视频；必要时暂停在明显的手内调整处。
 
-## 13. 从仿真到现实：Ground Truth 变成状态估计
+## 14. 从仿真到现实：Ground Truth 变成状态估计
 
 **对应英文标题：** Simulation exposes the state. Reality requires estimation.
 
@@ -184,7 +200,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 先讲 simulator 一侧，再 reveal real robot 一侧与底部过渡句。
 
-## 14. 真实部署 Pipeline：向固定策略提供同样的接口
+## 15. 真实部署 Pipeline：向固定策略提供同样的接口
 
 **对应英文标题：** Real deployment supplies the same policy interface
 
@@ -198,7 +214,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 按 setup、goal extraction、online tracking、fixed actor 的顺序走完整张图。
 
-## 15. 目标切换由到达事件触发，而不是按演示时钟播放
+## 16. 目标切换由到达事件触发，而不是按演示时钟播放
 
 **对应英文标题：** The robot advances goals only after reaching them
 
@@ -212,7 +228,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 依次揭示三个频率，最后强调 goal switching 的触发条件。
 
-## 16. 闭环策略跟随未见过的工具轨迹
+## 17. 闭环策略跟随未见过的工具轨迹
 
 **对应英文标题：** The closed loop follows unseen tool trajectories
 
@@ -224,7 +240,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 播放 inference 视频，并指向人类演示、goal visualization 与 robot execution 三部分。
 
-## 17. 刷子与锤子：先调整工具，再执行交互
+## 18. 刷子与锤子：先调整工具，再执行交互
 
 **对应英文标题：** Brush and hammer: reorientation before interaction
 
@@ -236,7 +252,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 分别点击 Brush 和 Hammer 播放按钮；V 键控制最后选择的视频。
 
-## 18. 马克笔与橡皮：沿表面执行工具轨迹
+## 19. 马克笔与橡皮：沿表面执行工具轨迹
 
 **对应英文标题：** Marker and eraser: tool motion along a surface
 
@@ -248,7 +264,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 先播放 Marker，再播放 Eraser；让听众比较 tip-sensitive 与 area-contact 两种情况。
 
-## 19. 铲子与螺丝刀：更大的姿态变化
+## 20. 铲子与螺丝刀：更大的姿态变化
 
 **对应英文标题：** Spatula and screwdriver: larger orientation changes
 
@@ -260,7 +276,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 分别播放 Spatula 和 Screwdriver；明确 screwdriver 不是 fastening。
 
-## 20. 六类工具上的真实世界迁移
+## 21. 六类工具上的真实世界迁移
 
 **对应英文标题：** Real-world transfer across six tool categories
 
@@ -274,7 +290,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 简要读总体和趋势，不逐项念每个数字。
 
-## 21. 恢复行为体现反馈能力，也暴露边界
+## 22. 恢复行为体现反馈能力，也暴露边界
 
 **对应英文标题：** Recovery illustrates feedback, with clear limits
 
@@ -286,7 +302,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 播放 recovery 视频，随后停在三条限制上。
 
-## 22. 由该方法引出的三个研究方向
+## 23. 由该方法引出的三个研究方向
 
 **对应英文标题：** Three research directions suggested by the method
 
@@ -304,7 +320,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 三点依次揭示；开头先提醒这是 presenter hypotheses。
 
-## 23. 总结：可复用 Motor Skill 依赖合适的任务接口
+## 24. 总结：可复用 Motor Skill 依赖合适的任务接口
 
 **对应英文标题：** A reusable motor skill needs a well-chosen task interface
 
@@ -316,7 +332,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 依次出现三条总结，最后停在讨论问题。
 
-## 24. 备份：RL Ablation 揭示关键训练组件
+## 25. 备份：RL Ablation 揭示关键训练组件
 
 **对应英文标题：** Ablations identify important RL ingredients
 
@@ -328,7 +344,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 只在问答中打开；不要把 training reward 曲线解读成真实成功率。
 
-## 25. 备份：论文、项目视频与相关工作
+## 26. 备份：论文、项目视频与相关工作
 
 **对应英文标题：** References, videos and source material
 

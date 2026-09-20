@@ -45,6 +45,16 @@ note('Training pipeline: learn pose reaching through interaction','仿真训练 
 最终得到的是一个通用 actor，而不是每收到一段人类演示就重新训练一个 task-specific policy。尤其注意：这一阶段没有人类任务轨迹，也没有真实相机。`,
 '按动画顺序先讲环境闭环，再揭示 asymmetric critic。'),
 
+note('SAPG splits exploration and aggregates experience','SAPG：拆分探索，再聚合经验','约 100 秒',
+`SAPG 的全称是 Split and Aggregate Policy Gradients，可以把它理解成面向大规模并行仿真的 PPO 扩展。它没有替换 actor-critic 框架，主要改变的是如何组织探索数据，以及 leader policy 怎样复用这些数据。
+
+第一步是 Split。把大量并行环境分给一个 leader policy 和多个 follower policies。不同 follower 使用不同强度的 entropy regularization，因此它们会形成不同的 exploration-exploitation 行为。有些策略更倾向于稳定利用当前解，有些策略会尝试更分散的动作。每个策略在自己的环境 block 中采集数据，followers 仍然使用自己的 on-policy 数据执行常规 PPO 更新。图里只画了几个代表性的 policy block，π₁ 到 πM 表示一般的策略 population，并不表示系统一定只有四个策略。
+
+第二步是 Aggregate。Leader 使用自己的 on-policy 数据，同时从 follower datasets 中采样经验。由于这些轨迹并不是 leader 自己生成的，所以属于 off-policy experience，需要通过 importance weighting 修正策略分布差异。最终部署的是聚合后更新的 leader policy。
+
+直观上，普通 PPO 像一个探索者同时运行很多环境；SAPG 则让一组探索风格不同的策略分别寻找可行行为，再让 leader 吸收更广泛的经验。它适合这里的原因是灵巧手动作维度高、接触行为难探索，而且仿真一次可以并行运行上万个环境。`,
+'第一次前进键展示 Split：并行环境分配给 leader 和 followers；第二次展示 Aggregate：followers 的经验经过 importance weighting 汇入 leader update。'),
+
 note('Procedural tools cover shape and mass variation','程序化工具覆盖几何与质量变化','约 80 秒',
 `训练分布由程序化工具提供。作者预先规定了 handle-head 这一结构先验，然后随机化尺寸、形状、密度以及相关物理属性。策略获得的是一个粗略 grasp-region box 和对象中心的位姿特征，不是完整 CAD mesh，也没有显式的质量或惯量估计。
 

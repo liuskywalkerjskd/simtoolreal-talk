@@ -10,6 +10,8 @@ Videos and their poster frames come from https://simtoolreal.github.io/. Exact U
 
 Visual design follows the user-supplied https://github.com/Mizoreww/steerable-vla-talk template and its prior A2A adaptation: white background, teal rules, serif headings, spacious scientific figures and source footers. No institutional logo or speaker identity is reused.
 
+The editable SAPG schematic summarizes the leader–follower data flow described by Singla et al., *Split and Aggregate Policy Gradients*, ICML 2024: https://sapg-rl.github.io/resources/2024_icml_sapg.pdf. It is a presenter redraw, not a copied paper figure.
+
 ## KaTeX
 
 Local KaTeX CSS and fonts are included under their original license. See `assets/katex/LICENSE`. Version 0.18.7.
