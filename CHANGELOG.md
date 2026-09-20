@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.4.0] - 2026-09-20
+
+### Features
+
+- Merge the Discussion and Takeaway pages into one closing slide.
+- Make structured simulation the primary conclusion and retain task interfaces and lightweight VLMs as two secondary research directions.
+- Update the English and Chinese notes for the new 23-slide main talk.
+
+### Design Rationale
+
+- Remove the repetition between the first Discussion point and the separate Takeaway.
+- Give the closing argument a clear hierarchy instead of presenting four apparent conclusions across two pages.
+
+### Notes & Caveats
+
+- The closing page continues to label all three ideas as presenter hypotheses.
+- The main claim remains complementary to end-to-end action models rather than a demonstrated replacement.
+
 ## [3.3.1] - 2026-09-20
 
 ### Features

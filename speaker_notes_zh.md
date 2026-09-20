@@ -1,6 +1,6 @@
 # SimToolReal 中文逐页汇报稿
 
-建议时长：正文 32–37 分钟（含循环 GIF 展示），另加讨论。第 1–24 页为正文，第 25 页为来源备份页。每页均与 slides.html 的页码和英文标题严格对应。
+建议时长：正文 31–36 分钟（含循环 GIF 展示），另加讨论。第 1–23 页为正文，第 24 页为来源备份页。每页均与 slides.html 的页码和英文标题严格对应。
 
 ## 1. SimToolReal：从工具运动到机器人技能
 
@@ -306,39 +306,25 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** Recovery GIF 会自动循环；观察一次恢复过程后，将注意力转向三条限制。
 
-## 23. 由该方法引出的三个研究方向
-
-**对应英文标题：** Three research directions suggested by the method
-
-**建议时间：** 约 180 秒
-
-下面三点是我基于论文的延伸思考，不是作者已经验证的结果。
-
-第一，这种路线可能是大规模端到端 action model 之外的一条互补路径：用结构化仿真 RL 先训练稳定、可复用的低层 motor skill，再让更高层系统负责选择工具和生成目标。但 SimToolReal 还不能支持“机器人在野外自主学会新技能”这一强结论，因为它仍需要人工设计的接口、演示和感知 setup。
-
-第二，真正可迁移的思想也许不是“所有任务都变成 6D pose”，而是寻找一个足够紧凑、又保留任务必要信息的 interface。刚性工具适合 SE(3) pose；但门、绳子、布料、液体或 force-critical tasks 可能还需要 articulation、shape、contact 和 force state。
-
-第三，可以考虑用轻量级 VLM 减少人工 semantic setup，例如自动选择工具、grasp region，或者从语言与视频中提出 subgoals。但 VLM 不能仅凭语义替代 metric tracking。进入控制闭环后仍然需要厘米级误差、低延迟和明确的失败检测。
-
-一个可执行的后续实验是保持 actor 完全冻结，只把人工 prompt 替换为 VLM 的区域与子目标建议，然后同时测 setup 时间、pose error、failure recovery 和真正的 functional completion。
-
-**操作提示：** 三点依次揭示；开头先提醒这是 presenter hypotheses。
-
-## 24. 总结：结构化仿真可能是获得通用机器人技能的另一条路径
+## 23. 总结与思考：结构化仿真及其两个延伸方向
 
 **对应英文标题：** Structured simulation as a route to reusable robot skills
 
-**建议时间：** 约 75 秒
+**建议时间：** 约 210 秒
 
-最后不再重复前面已经讲过的方法细节，只保留一个更概括的个人思考。
+最后把三个思考收束在同一页。它们是从论文出发的 presenter hypotheses，不是作者已经验证的结果。其中第一点是整场汇报最重要的 takeaway，后两点是沿着这个判断继续展开的研究方向。
 
-当前很多工作尝试通过扩大端到端 action model、增加真实机器人数据，让一个大模型覆盖更多任务。SimToolReal 提示了另一条可能的路线：先在结构化仿真中学习稳定、可复用的底层 motor competence，再让 perception、human demonstration 或更高层模型负责给出 object-level goals。也就是说，底层策略负责“怎样把动作做出来”，上层系统负责“工具接下来应该去哪里”。
+当前很多工作尝试扩大端到端 action model，并增加真实机器人数据来覆盖更多任务。SimToolReal 提示了一条互补路线：先在结构化仿真中学习稳定、可复用的底层 motor competence，再让 perception、human demonstration 或更高层模型负责提供 object-level goals。底层策略解决“动作怎样实现”，上层系统决定“工具接下来应该做什么”。这可能成为机器人在开放环境中获得技能的一部分，但论文还没有解决自主发现任务、生成目标或设计 reward。
 
-这种分工也许能够减少每个新任务都重新收集大量机器人动作数据的需求，并成为机器人在开放环境中获得技能的一部分。不过这里必须保留边界：SimToolReal 只验证了可迁移 motor controller，还没有解决机器人怎样自主发现任务、生成目标或者设计 reward。因此这一页表达的是由论文引出的研究判断，不是论文已经证明的最终结论。
+第二个延伸是 task interface。真正可迁移的思想也许不是把所有任务都变成 6D pose，而是寻找一个足够紧凑、又保留必要信息的表示。刚性工具适合 SE(3) pose；门、绳子、布料或 force-critical tasks 可能还需要 articulation、shape、contact 和 force state。
 
-**操作提示：** 用这一个观点收束汇报，不再逐条回顾 pipeline、SAPG 或 LSTM。
+第三个延伸是轻量级 VLM。它可以减少人工 semantic setup，例如选择工具、定位 grasp region，或者从语言和视频中提出 subgoals。但进入控制闭环后，厘米级误差、低延迟和失败检测仍然需要 geometric perception。更现实的分工是让 VLM 负责语义，让几何视觉模块负责精确状态估计。
 
-## 25. 备份：论文、项目视频与相关工作
+因此，这一页的层级不是三个同等重要的结论：第一点负责收束整场汇报，第二和第三点说明这条 modular route 还可以向 task representation 与 semantic planning 两个方向扩展。
+
+**操作提示：** 主结论直接出现；第一次前进键展示 task interface，第二次展示轻量级 VLM。最后用页面底部的边界说明收束。
+
+## 24. 备份：论文、项目视频与相关工作
 
 **对应英文标题：** References, videos and source material
 

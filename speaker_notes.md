@@ -1,6 +1,6 @@
 # SimToolReal · English Speaker Notes
 
-Suggested duration: 32–37 minutes including looping GIFs, plus discussion. Slides 1–24 are the main talk. Slide 25 is the reference backup. Use Right / Space for step reveals, A to reveal a whole page, and F for fullscreen. Experiment GIFs loop automatically, are silent and preserve the original playback speed.
+Suggested duration: 31–36 minutes including looping GIFs, plus discussion. Slides 1–23 are the main talk. Slide 24 is the reference backup. Use Right / Space for step reveals, A to reveal a whole page, and F for fullscreen. Experiment GIFs loop automatically, are silent and preserve the original playback speed.
 
 ## 1. SimToolReal
 
@@ -134,19 +134,13 @@ The recovery GIF loops automatically and brings the emphasis back from average p
 
 Source: Looping GIF converted from the official recovery video · Paper §IV-A and §V · Qualitative behavior
 
-## 23. Three research directions suggested by the method
+## 23. Structured simulation as a route to reusable robot skills
 
-Discuss the user's three inspirations together. First, structured simulation and reusable motor controllers may complement scaling large action models. SimToolReal establishes transfer in a structured setup, not autonomous online skill acquisition in the wild. It already relies on vision foundation models. Second, the deeper idea is finding sufficient task interfaces. Rigid SE(3) poses will not capture articulated state, deformation, force or all scene constraints. Third, lightweight VLMs could reduce manual semantic prompting or help choose and revise subgoals. Replacing a tracker directly would need evaluation of metric pose error, latency and failure behavior. A first controlled experiment could keep the actor fixed while comparing manual prompts with VLM region proposals, measuring setup effort and end-to-end functional completion.
+Close with the user's three inspirations in one hierarchy rather than a Discussion page followed by a repetitive Takeaway. The first point is the main conclusion: structured simulation and reusable motor controllers may complement scaling large action models. SimToolReal establishes transfer in a structured setup, not autonomous online skill acquisition in the wild. Then reveal two extensions. The deeper idea behind the second point is to search for sufficient task interfaces. Rigid SE(3) poses will not capture articulated state, deformation, force or all scene constraints. The third point assigns lightweight VLMs to semantic setup, tool selection and subgoal generation, while metric pose tracking remains geometrically grounded. Replacing the tracker directly would require evidence on pose error, latency and failure behavior. A controlled follow-up could freeze the actor and compare manual prompts with VLM region proposals, measuring setup effort and functional completion.
 
-Source: Presenter discussion · Grounded in the method and acknowledged limitations
+Source: Presenter discussion · Main reflection and two research extensions
 
-## 24. Structured simulation as a route to reusable robot skills
-
-Close with one presenter reflection rather than another method recap. SimToolReal suggests a complementary route to broadly useful robot skills: use structured simulation to learn reusable physical competence, then let perception and object-level goals adapt that competence to new tools and trajectories. This differs from learning every task end to end from robot action demonstrations. Keep the claim forward-looking. The paper demonstrates a transferable motor controller inside a carefully designed interface. It does not demonstrate autonomous discovery of new tasks, goals or rewards in the wild.
-
-Source: Presenter reflection · Motivated by the paper’s modular skill interface
-
-## 25. References, videos and source material
+## 24. References, videos and source material
 
 Paper figures and project videos retain their original authorship. Custom diagrams are explanatory schematics. The SAPG page simplifies the leader–follower data flow from Singla et al., ICML 2024. Real-world aggregate charts derive from the published Table II data, provided in CSV form alongside this deck. The discussion section explicitly labels untested extensions. The package also contains English speaker notes and a detailed Chinese narrative assessment.
 
