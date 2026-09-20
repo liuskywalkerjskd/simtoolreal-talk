@@ -22,7 +22,7 @@ No web connection is required to present the HTML deck. Keep `slides.html`, `ass
 
 Right / Space advances a build or a slide. Left reverses a build. `A` reveals the current slide. `F` enters fullscreen. `V` plays or pauses the selected video. On paired tool pages, click the desired tool's play button first. Selecting another video pauses the previous one. Videos never autoplay and pause when leaving their slide. Native controls, including video fullscreen, remain available. Click a paper figure to enlarge; Escape closes it. The bottom toolbar appears on hover.
 
-The main talk uses nine silent author-provided clips at original speed: simulation, inference, brush, hammer, marker, eraser, spatula, screwdriver and recovery. The earlier difficulty clip remains as an optional asset. Original source links are on each video slide and in `assets/videos/README.md`. The category montages illustrate behavior and are not random evaluation samples. PDF cannot play videos.
+The cover automatically loops a silent 10-second montage assembled from the official brush, hammer, marker and spatula experiments. The main talk uses nine silent author-provided clips at original speed: simulation, inference, brush, hammer, marker, eraser, spatula, screwdriver and recovery. The earlier difficulty clip remains as an optional asset. Original source links and the cover transformation are documented in `assets/videos/README.md`. The category montages illustrate behavior and are not random evaluation samples. PDF uses a four-tool poster frame because it cannot play videos.
 
 ## Talk map
 

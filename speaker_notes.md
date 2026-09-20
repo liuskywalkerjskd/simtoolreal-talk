@@ -4,7 +4,7 @@ Suggested duration: 30–35 minutes including videos, plus discussion. Slides 1�
 
 ## 1. SimToolReal
 
-The central question is how to reuse a dexterous controller across unfamiliar tools and goal trajectories. SimToolReal trains such a controller on simple synthetic tools in simulation. At deployment, human demonstrations provide object motion goals, while the robot decides how its own hand and arm should realize them. We will ask how to teach tool use, then formulate a pose-reaching problem and study its simulation-trained recurrent policy. Only after seeing simulation behavior will we introduce the real-world perception pipeline. Several tool videos illustrate transfer before a short quantitative summary and discussion. The paper is listed in the RSS 2026 proceedings.
+The cover montage cycles through real robot experiments with a brush, hammer, marker and spatula. Use it to establish the physical setting before introducing the central question: how can one dexterous controller transfer across unfamiliar tools and goal trajectories? SimToolReal trains such a controller on simple synthetic tools in simulation. At deployment, human demonstrations provide object motion goals, while the robot decides how its own hand and arm should realize them. We will ask how to teach tool use, then formulate a pose-reaching problem and study its simulation-trained recurrent policy. Only after seeing simulation behavior will we introduce the real-world perception pipeline. Several tool videos illustrate transfer before a short quantitative summary and discussion. The paper is listed in the RSS 2026 proceedings.
 
 Source: Kedia et al. · SimToolReal · arXiv:2602.16863v2
 

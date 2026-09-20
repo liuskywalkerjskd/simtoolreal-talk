@@ -15,4 +15,6 @@ The local MP4 files are silent, 1280px-wide presentation copies. Time is unchang
 - spatula.mp4: https://simtoolreal.github.io/static/videos/Spatula_1080p_compressed.mp4
 - screwdriver.mp4: https://simtoolreal.github.io/static/videos/Screwdriver_1080p_compressed.mp4
 
+`cover_montage.mp4` is a silent 10-second presentation montage assembled from 2.5-second, original-speed excerpts of the official brush, hammer, marker and spatula files above. It introduces no new footage or experimental evidence. `cover_montage.jpg` combines one real-robot frame from each of those four category videos for PDF export.
+
 The six category clips are author-created montages that retain their original titles and task labels. They are qualitative examples, not random evaluation samples. The screwdriver category demonstrates free-space spinning. In version 3, nine clips appear in the main deck; `difficulty.mp4` remains an optional asset. Each new category clip is shorter than 15 seconds and is included in full, without time compression.
