@@ -16,13 +16,14 @@ export function simPipeline(){return svg(
  `<path d="M175 55V43H960V55" fill="none" stroke="${T}" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arr)"/>`+
  txt(720,328,'SAPG updates the policy using simulated experience',22,T,'middle')+txt(720,362,'Critic supports training only',20,M,'middle'),1),390);}
 
-export function memory(){let s=txt(28,26,'THE SAME RECURRENT NETWORK AT EVERY CONTROL STEP',15,M);[190,550,910].forEach((x,i)=>{
+export function memory(){let s=txt(28,22,'THE SAME RECURRENT NETWORK AT EVERY CONTROL STEP',15,M);[190,550,910].forEach((x,i)=>{
  const step=i===0?'t − 1':i===1?'t':'t + 1';
- const cell=txt(x,76,'Observation x'+['ₜ₋₁','ₜ','ₜ₊₁'][i],22,T,'middle')+line(x,90,x,120,T,true)+rect(x-105,137,210,93)+txt(x,175,'LSTM [1024]',24,T,'middle')+txt(x,209,'time '+step,18,M,'middle')+
- line(x,242,x,270,T,true)+txt(x+24,263,'MLP',16,M)+txt(x,305,'Action a'+['ₜ₋₁','ₜ','ₜ₊₁'][i],23,T,'middle');
- s+=i?g(cell+line(x-240,181,x-121,181,T,true)+txt(x-181,151,'h, c',20,M,'middle'),i):cell;
+ const recurrent=i===1?'hₜ₋₁, cₜ₋₁':'hₜ, cₜ';
+ const cell=txt(x,59,'Observation x'+['ₜ₋₁','ₜ','ₜ₊₁'][i],21,T,'middle')+line(x,72,x,92,T,true)+rect(x-105,103,210,70)+txt(x,133,'LSTM [1024]',23,T,'middle')+txt(x,159,'time '+step,16,M,'middle')+
+ line(x,180,x,199,T,true)+txt(x+23,194,'MLP',15,M)+txt(x,229,'Action a'+['ₜ₋₁','ₜ','ₜ₊₁'][i],21,T,'middle');
+ s+=i?g(cell+line(x-240,138,x-121,138,T,true)+txt(x-181,116,recurrent,17,M,'middle'),i):cell;
  });
- s+=txt(560,370,'MLP action head: 1024 → 1024 → 512 → 512 → 29 outputs',21,T,'middle');return svg(s,400);}
+ return svg(s,245);}
 
 export function deployment(){return svg(
  txt(25,25,'SETUP FOR A NEW TOOL / DEMONSTRATION',15,T)+

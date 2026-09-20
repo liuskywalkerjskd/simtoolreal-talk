@@ -132,15 +132,19 @@ actor 不接收完整 mesh、显式质量、惯量或 privileged object velocity
 
 **对应英文标题：** LSTM memory carries interaction history across steps
 
-**建议时间：** 约 120 秒
+**建议时间：** 约 150 秒
 
-每个控制步，当前 feature vector 与上一步的 hidden state、cell state 一起送入同一个 LSTM。LSTM 更新记忆，再通过 MLP action head 输出 29 维动作。图上展开的多个时间步是同一个共享参数的 recurrent policy，并不是三套独立策略。
+先沿时间轴从左到右看。在时刻 t，同一个 LSTM 接收当前 feature vector x_t、上一时刻 hidden state h_{t-1} 和 cell state c_{t-1}，然后产生更新后的 h_t、c_t。action MLP 读取 h_t，输出当前 29 维动作 a_t。图中三个时间步共享同一套网络参数，并不是三套独立策略。
 
-论文配置中 LSTM 有 1,024 个 hidden units；后面的 MLP hidden widths 是 1,024、1,024、512、512，最后得到 29 维输出。模型还使用 layer normalization，MLP 使用 ELU。上一时刻关节 target 也作为显式 observation 输入。
+Cell state c_t 是内部记忆通道。标准 LSTM 更新可以写成 c_t=f_t⊙c_{t-1}+i_t⊙c̃_t。Forget gate f_t 决定旧记忆保留多少，input gate i_t 决定把多少候选信息写入记忆。这里保存的不是过去 observation 的原始副本，而是网络学习到的历史摘要。
 
-为什么这里需要 memory？当前一帧没有直接给出工具质量、惯量、接触稳定性和完整速度信息。策略可以根据此前“施加什么动作、物体怎样响应”的历史，形成对潜在几何与动力学的隐式适应。但我们只能说 recurrence 为这种适应提供了机制，不能进一步声称论文证明某个 hidden unit 明确编码了质量。
+Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_t)。Output gate o_t 决定 cell state 中哪些信息在当前时刻用于决策。h_t 一方面送入 action MLP，另一方面参与下一时刻 gate 的计算。因此 h 和 c 都包含历史，但 c 更接近内部记忆，h 更接近当前可用于输出动作的工作表示。
 
-**操作提示：** 沿时间轴从左到右讲，最后揭示底部关于部分可观测性的总结。
+论文配置中两种 state 都是 1,024 维。后面的 MLP hidden widths 是 1,024、1,024、512、512，最后得到 29 维输出。模型使用 layer normalization，MLP 使用 ELU。上一时刻 joint-position target 还会作为显式 observation 输入。
+
+为什么需要这种 memory？单帧没有直接给出工具质量、惯量、接触稳定性和完整速度。策略可以结合此前执行的动作和工具响应，形成对潜在几何与动力学的隐式适应。但这只是一种机制解释，论文没有证明某个 hidden unit 明确编码了质量。页面中的 gate 公式属于标准 LSTM，也不是本文提出的新结构。
+
+**操作提示：** 前两次前进键展开 t 和 t+1；第三次解释 cell state；第四次解释 hidden state；第五次强调它们是历史摘要，而不是原始历史帧堆叠。
 
 ## 11. Action Head 对手臂与手指采用不同控制方式
 
