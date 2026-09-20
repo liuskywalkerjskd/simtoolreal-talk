@@ -24,11 +24,11 @@ export function sapg(){const xs=[170,430,690,950];
  txt(x,194,i===0?'balanced exploration':i===1?'lower entropy':i===2?'higher entropy':'diverse exploration',16,M,'middle')+
  line(x,210,x,234,T,true)+rect(x-50,246,100,38,'#ffffff',T)+txt(x,272,'Data  D'+(i===3?'M':i+1),18,T,'middle')).join('');
  const aggregate=txt(28,321,'2  AGGREGATE',15,T)+
- `<path d="M170 285V342H435" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
- `<path d="M430 285V322H500V342" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
- `<path d="M690 285V322H620V342" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
- `<path d="M950 285V342H685" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
- txt(300,333,'D₁: own on-policy data',15,M,'middle')+txt(824,333,'D₂ … Dₘ: importance-weighted',15,M,'middle')+
+ `<path d="M170 285V384H435" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ `<path d="M430 285V330H500V355" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ `<path d="M690 285V330H620V355" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ `<path d="M950 285V384H685" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ txt(302,376,'D₁: own on-policy data',15,M,'middle')+txt(820,376,'D₂ … Dₘ: importance-weighted',15,M,'middle')+
  rect(435,355,250,58,S)+txt(560,382,'PPO-style leader update',21,T,'middle')+txt(560,403,'on-policy + aggregated data',16,M,'middle')+
  line(560,415,560,434,T,true)+txt(560,463,'Deploy leader policy  π₁',22,T,'middle');
  return svg(g(split,1)+g(aggregate,2),480);}
