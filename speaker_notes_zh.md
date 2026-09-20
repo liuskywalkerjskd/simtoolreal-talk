@@ -1,6 +1,6 @@
 # SimToolReal 中文逐页汇报稿
 
-建议时长：正文 33–38 分钟（含视频），另加讨论。第 1–25 页为正文，第 26 页为来源备份页。每页均与 slides.html 的页码和英文标题严格对应。
+建议时长：正文 32–37 分钟（含视频），另加讨论。第 1–24 页为正文，第 25 页为来源备份页。每页均与 slides.html 的页码和英文标题严格对应。
 
 ## 1. SimToolReal：从工具运动到机器人技能
 
@@ -146,27 +146,15 @@ SAPG 的全称是 Split and Aggregate Policy Gradients，可以把它理解成�
 
 **操作提示：** 共四次揭示：1 smooth；2 grasp；3 goal 和 pose distance；4 最下方 reward 与 actor–critic objective 的区别。
 
-## 11. 策略观察紧凑的 Object-Centric State
-
-**对应英文标题：** The policy observes a compact, object-centric state
-
-**建议时间：** 约 120 秒
-
-接下来进入 actor 的输入。机器人 proprioception 包括 29 个关节的位置与速度、上一步关节目标、掌心位姿，以及相对掌心的五个指尖位置。
-
-对象侧包括工具朝向、相对掌心的四个 keypoints、当前工具到目标工具的四组 keypoint difference，以及 grasp-region box 的尺寸。注意两个容易混淆的细节：observation 中的 keypoints 会随 grasp box 尺寸变化，用来描述实例几何；上一页 reward 里的 keypoints 使用固定尺度，以保持统一的到达阈值。
-
-actor 不接收完整 mesh、显式质量、惯量或 privileged object velocity。在仿真中，这些可部署输入还会加入有针对性的噪声和延迟，为后续 sim-to-real 做准备。
-
-**操作提示：** 可以用“机器人自身—当前工具—当前目标”三层来口头归纳输入。
-
-## 12. LSTM 用历史信息补足部分可观测性
+## 11. LSTM 用历史信息补足部分可观测性
 
 **对应英文标题：** LSTM memory carries interaction history across steps
 
 **建议时间：** 约 150 秒
 
 先沿时间轴从左到右看。在时刻 t，同一个 LSTM 接收当前 feature vector x_t、上一时刻 hidden state h_{t-1} 和 cell state c_{t-1}，然后产生更新后的 h_t、c_t。action MLP 读取 h_t，输出当前 29 维动作 a_t。图中三个时间步共享同一套网络参数，并不是三套独立策略。
+
+这里简单补充 x_t 的含义，不再单独用一页展开。它包括机器人 proprioception 和上一步 joint target，以及工具朝向、相对掌心的 keypoints、当前目标的 keypoint error 和 grasp-region box 尺寸。actor 不直接接收完整 mesh、显式质量、惯量或 privileged object velocity。
 
 Cell state c_t 是内部记忆通道。标准 LSTM 更新可以写成 c_t=f_t⊙c_{t-1}+i_t⊙c̃_t。Forget gate f_t 决定旧记忆保留多少，input gate i_t 决定把多少候选信息写入记忆。这里保存的不是过去 observation 的原始副本，而是网络学习到的历史摘要。
 
@@ -178,7 +166,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 前两次前进键展开 t 和 t+1；第三次解释 cell state；第四次解释 hidden state；第五次强调它们是历史摘要，而不是原始历史帧堆叠。
 
-## 13. Action Head 对手臂与手指采用不同控制方式
+## 12. Action Head 对手臂与手指采用不同控制方式
 
 **对应英文标题：** The action head controls the arm and hand differently
 
@@ -192,7 +180,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 先比较 incremental 与 absolute target，再揭示 EMA 和 fixed weights。
 
-## 14. 仿真效果：到达多样工具位姿
+## 13. 仿真效果：到达多样工具位姿
 
 **对应英文标题：** Simulation: reaching diverse tool poses
 
@@ -204,7 +192,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 播放 training 视频；必要时暂停在明显的手内调整处。
 
-## 15. 从仿真到现实：Ground Truth 变成状态估计
+## 14. 从仿真到现实：Ground Truth 变成状态估计
 
 **对应英文标题：** Simulation exposes the state. Reality requires estimation.
 
@@ -216,7 +204,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 先讲 simulator 一侧，再 reveal real robot 一侧与底部过渡句。
 
-## 16. 真实部署 Pipeline：向固定策略提供同样的接口
+## 15. 真实部署 Pipeline：向固定策略提供同样的接口
 
 **对应英文标题：** Real deployment supplies the same policy interface
 
@@ -230,7 +218,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 按 setup、goal extraction、online tracking、fixed actor 的顺序走完整张图。
 
-## 17. 目标切换由到达事件触发，而不是按演示时钟播放
+## 16. 目标切换由到达事件触发，而不是按演示时钟播放
 
 **对应英文标题：** The robot advances goals only after reaching them
 
@@ -244,7 +232,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 依次揭示三个频率，最后强调 goal switching 的触发条件。
 
-## 18. 闭环策略跟随未见过的工具轨迹
+## 17. 闭环策略跟随未见过的工具轨迹
 
 **对应英文标题：** The closed loop follows unseen tool trajectories
 
@@ -256,7 +244,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 播放 inference 视频，并指向人类演示、goal visualization 与 robot execution 三部分。
 
-## 19. 刷子与锤子：先调整工具，再执行交互
+## 18. 刷子与锤子：先调整工具，再执行交互
 
 **对应英文标题：** Brush and hammer: reorientation before interaction
 
@@ -268,7 +256,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 分别点击 Brush 和 Hammer 播放按钮；V 键控制最后选择的视频。
 
-## 20. 马克笔与橡皮：沿表面执行工具轨迹
+## 19. 马克笔与橡皮：沿表面执行工具轨迹
 
 **对应英文标题：** Marker and eraser: tool motion along a surface
 
@@ -280,7 +268,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 先播放 Marker，再播放 Eraser；让听众比较 tip-sensitive 与 area-contact 两种情况。
 
-## 21. 铲子与螺丝刀：更大的姿态变化
+## 20. 铲子与螺丝刀：更大的姿态变化
 
 **对应英文标题：** Spatula and screwdriver: larger orientation changes
 
@@ -292,7 +280,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 分别播放 Spatula 和 Screwdriver；明确 screwdriver 不是 fastening。
 
-## 22. 六类工具上的真实世界迁移
+## 21. 六类工具上的真实世界迁移
 
 **对应英文标题：** Real-world transfer across six tool categories
 
@@ -306,7 +294,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 简要读总体和趋势，不逐项念每个数字。
 
-## 23. 恢复行为体现反馈能力，也暴露边界
+## 22. 恢复行为体现反馈能力，也暴露边界
 
 **对应英文标题：** Recovery illustrates feedback, with clear limits
 
@@ -318,7 +306,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 播放 recovery 视频，随后停在三条限制上。
 
-## 24. 由该方法引出的三个研究方向
+## 23. 由该方法引出的三个研究方向
 
 **对应英文标题：** Three research directions suggested by the method
 
@@ -336,7 +324,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 三点依次揭示；开头先提醒这是 presenter hypotheses。
 
-## 25. 总结：可复用 Motor Skill 依赖合适的任务接口
+## 24. 总结：可复用 Motor Skill 依赖合适的任务接口
 
 **对应英文标题：** A reusable motor skill needs a well-chosen task interface
 
@@ -348,7 +336,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 依次出现三条总结，最后停在讨论问题。
 
-## 26. 备份：论文、项目视频与相关工作
+## 25. 备份：论文、项目视频与相关工作
 
 **对应英文标题：** References, videos and source material
 

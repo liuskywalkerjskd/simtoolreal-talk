@@ -85,16 +85,10 @@ note('RL training signal: how each reward term is constructed','RL 训练信号�
 这套设计的逻辑是：先让动作平滑，再塑造接近和抬起，最后才持续推动工具到达目标。progress-based reward 只奖励“比之前更好”，避免机器人停在目标附近反复刷取同一份 shaping reward。`,
 '共四次揭示：1 smooth；2 grasp；3 goal 和 pose distance；4 最下方 reward 与 actor–critic objective 的区别。'),
 
-note('The policy observes a compact, object-centric state','策略观察紧凑的 Object-Centric State','约 120 秒',
-`接下来进入 actor 的输入。机器人 proprioception 包括 29 个关节的位置与速度、上一步关节目标、掌心位姿，以及相对掌心的五个指尖位置。
-
-对象侧包括工具朝向、相对掌心的四个 keypoints、当前工具到目标工具的四组 keypoint difference，以及 grasp-region box 的尺寸。注意两个容易混淆的细节：observation 中的 keypoints 会随 grasp box 尺寸变化，用来描述实例几何；上一页 reward 里的 keypoints 使用固定尺度，以保持统一的到达阈值。
-
-actor 不接收完整 mesh、显式质量、惯量或 privileged object velocity。在仿真中，这些可部署输入还会加入有针对性的噪声和延迟，为后续 sim-to-real 做准备。`,
-'可以用“机器人自身—当前工具—当前目标”三层来口头归纳输入。'),
-
 note('LSTM memory carries interaction history across steps','LSTM 用历史信息补足部分可观测性','约 150 秒',
 `先沿时间轴从左到右看。在时刻 t，同一个 LSTM 接收当前 feature vector x_t、上一时刻 hidden state h_{t-1} 和 cell state c_{t-1}，然后产生更新后的 h_t、c_t。action MLP 读取 h_t，输出当前 29 维动作 a_t。图中三个时间步共享同一套网络参数，并不是三套独立策略。
+
+这里简单补充 x_t 的含义，不再单独用一页展开。它包括机器人 proprioception 和上一步 joint target，以及工具朝向、相对掌心的 keypoints、当前目标的 keypoint error 和 grasp-region box 尺寸。actor 不直接接收完整 mesh、显式质量、惯量或 privileged object velocity。
 
 Cell state c_t 是内部记忆通道。标准 LSTM 更新可以写成 c_t=f_t⊙c_{t-1}+i_t⊙c̃_t。Forget gate f_t 决定旧记忆保留多少，input gate i_t 决定把多少候选信息写入记忆。这里保存的不是过去 observation 的原始副本，而是网络学习到的历史摘要。
 

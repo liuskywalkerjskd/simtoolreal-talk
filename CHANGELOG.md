@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.2.2] - 2026-09-20
+
+### Features
+
+- Remove the standalone object-centric policy-input slide.
+- Fold the essential input definition into the LSTM speaker notes.
+- Realign the English and Chinese scripts to the new 25-slide deck.
+
+### Design Rationale
+
+- Avoid repeating information already established by the simulation pipeline and needed only briefly to interpret the LSTM input.
+
+### Notes & Caveats
+
+- The actor input details remain documented in the speaker notes, including the distinction between deployable features and privileged simulator state.
+
 ## [3.2.1] - 2026-09-20
 
 ### Features
