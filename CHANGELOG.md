@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.1.0] - 2026-09-20
+
+### Features
+
+- Reduce backup material from five pages to two, retaining only RL ablations and references.
+- Expand the training-signal page with the exact smoothness, approach, lift and goal-reaching reward constructions.
+- Integrate the four-keypoint pose distance into the reward explanation instead of isolating it in backup.
+- Add a detailed, slide-matched Chinese presentation script for all 25 pages.
+
+### Design Rationale
+
+- Keep the methodology complete while removing secondary baseline and specialist comparisons from the live deck.
+- Distinguish environment reward terms from the SAPG/PPO actor–critic optimization objective.
+- Make the script follow every reveal, video cue and evidence boundary in the English slides.
+
+### Notes & Caveats
+
+- The deleted baseline and specialist slides remain covered by the paper assessment and source data; they are not part of the presentation.
+- The reward page explains the paper's shaping terms, not a decomposition of the neural-network loss.
+- Backup pages are now slides 24–25.
+
 ## [3.0.0] - 2026-09-20
 
 ### Features

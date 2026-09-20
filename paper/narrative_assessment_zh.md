@@ -295,16 +295,16 @@ Fig. 8 的 5-seed 消融显示，在本文设置中移除 asymmetric critic 或�
 
 ## 9. Slides 内容安排
 
-2026-09-20 方法论版：23 页正文 + 5 页备份，建议含视频 30–35 分钟加讨论。
+2026-09-20 方法论版（v3.1）：23 页正文 + 2 页备份，建议含视频 30–35 分钟加讨论。另附与 25 页严格对应的中文逐页汇报稿。
 
 - 1–3：封面、开放 brainstorm、IL 与 human retargeting 的困难。
 - 4–5：object-centric insight，以及恢复的工具位置/朝向分步动画。
-- 6–12：仿真 pipeline、工具生成、reward、LSTM 观测/记忆/动作处理、仿真 reaching 视频。
+- 6–12：仿真 pipeline、工具生成、reward 的逐项构造、LSTM 观测/记忆/动作处理、仿真 reaching 视频。四 keypoint pose metric 已并入 reward 页面，同时明确 environment reward 不等于 SAPG/PPO 的优化 loss。
 - 13–16：ground truth 到 state estimation 的过渡、真实部署 pipeline、事件驱动目标、inference 视频。
 - 17–19：六类工具的成对实机视频。
 - 20–21：一页定量概览，随后 recovery 与方法边界。
 - 22–23：三个研究启发集中讨论，总结收尾。
-- 24–28：pose metric、brush baseline、specialist、消融与参考资料。
+- 24–25：RL 消融与参考资料。brush baseline 和 specialist 比较从 Slides 删除，但仍可在本文档和论文原文中查阅。
 
 完整逐次实验数据仍保留在 CSV 中。IL 的局限限定为本文场景中的动作数据采集、embodiment gap 与接触迁移问题，不能据此声称论文证明了 IL/VLA 无效。仿真、LSTM memory、真实部署分别提供可编辑 SVG，正文的仿真阶段不提前引入 RGB-D。
 

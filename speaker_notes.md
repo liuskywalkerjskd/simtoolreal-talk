@@ -1,6 +1,6 @@
 # SimToolReal · English Speaker Notes
 
-Suggested duration: 30–35 minutes including videos, plus discussion. Slides 1–23 are the main talk. Slides 24–28 are backup. Use Right / Space for step reveals, A to reveal a whole page, F for fullscreen, and V for video play/pause. On paired video pages, click the desired tool button first; V then controls that selected video. Clips are silent and run at original speed.
+Suggested duration: 30–35 minutes including videos, plus discussion. Slides 1–23 are the main talk. Slides 24–25 are backup. Use Right / Space for step reveals, A to reveal a whole page, F for fullscreen, and V for video play/pause. On paired video pages, click the desired tool button first; V then controls that selected video. Clips are silent and run at original speed.
 
 ## 1. SimToolReal
 
@@ -44,11 +44,11 @@ The authors do not train a semantic module to discover that all tools share a pu
 
 Source: Paper §III-B · Procedural Asset Generation appendix · Presenter schematic
 
-## 8. A shared reward induces the component skills
+## 8. RL training signal: how each reward term is constructed
 
-Avoid calling this reward-free learning or a single pure pose loss. The full reward includes smoothness and grasp shaping. The goal reward uses improvement over the best distance achieved so far rather than rewarding static proximity, and a large success bonus promotes completion. Once lifted, repeated random pose reaching induces reorientation and stable grasping behavior. The appendix contains the complete coefficients.
+Use “reward” rather than “loss” for the three terms on this page. Start with smoothness: the method subtracts separate L1 norms of current joint velocities for the seven arm joints and twenty-two hand joints, weighted by lambda arm and lambda hand. Then reveal grasp shaping. The approach term is lambda approach times improvement in mean fingertip-to-object distance relative to the best value seen in the episode. The lift term rewards object height above its initial value and adds a one-time bonus after crossing the lift threshold. Multiplication by one minus I grasped disables lifting reward after the first successful lift. Finally reveal goal reaching. The method stores the smallest keypoint distance d star achieved for the current goal and rewards only further improvement, which prevents repeated reward for remaining statically near a target. Crossing epsilon adds a success bonus and resamples the next goal. Distance is the maximum Euclidean error over four fixed-scale object-frame keypoints, using 14 by 3 by 3 centimeter scales. This makes translation and rotation enter one metric and puts more sensitivity on pitch and yaw than roll along the tool's long axis. The outer I grasped activates goal reward only after lifting. Distinguish these environment rewards from the SAPG/PPO actor–critic optimization loss.
 
-Source: Paper §III-B · Eq. 1–2 · Reward Function Details appendix
+Source: Paper §III-B · Appendix A, Eqs. 3–9 · Table I
 
 ## 9. The policy observes a compact, object-centric state
 
@@ -140,31 +140,13 @@ Close by returning to the initial question about how robots can acquire tool-use
 
 Source: Paper contributions and presenter synthesis
 
-## 24. Pose error couples translation and rotation
-
-The reward uses fixed scales of 14 by 3 by 3 centimeters to define four local keypoints. This makes pitch and yaw matter more than roll around the long tool axis. The observation representation instead uses instance-specific dimensions. Distinguishing the two prevents an incorrect interpretation of the evaluation tolerance as only translation accuracy or a uniform angular tolerance for every rotation axis.
-
-Source: Paper Reward Function Details appendix · Table I · §IV
-
-## 25. In-hand control matters in the brush comparison
-
-The comparison isolates different limitations. Kinematic retargeting does not reliably establish the required contacts. A fixed grasp can work when no tool rotation is needed, but the harder starting orientation makes the required arm motion problematic. SimToolReal can rotate the tool within the hand. On the easier variation the difference from fixed grasp is 98.0 minus 61.0, or 37 percentage points. Do not call this a 37 percent relative improvement or an average across all benchmark tasks. The fixed-grasp baseline initially uses SimToolReal to acquire the object.
-
-Source: Real robot · Paper Fig. 5 · Task Progress (%) · Limited to two brush variations
-
-## 26. Specialists are sensitive to changed tools and goals
-
-The specialists use the same policy architecture and reward setup, but train on one object and one trajectory per category. Six specialists are evaluated over ten rollouts each per condition. The general policy performs comparably on their training configurations and is much more robust to changed object instances or task trajectories. This is simulation evidence and should not be described as a real-world comparison against specialists. The figure supports qualitative magnitude comparisons; no invented exact bar heights are reported.
-
-Source: Simulation · Paper Fig. 6 · §IV-C
-
-## 27. Ablations identify important RL ingredients
+## 24. Ablations identify important RL ingredients
 
 The full policy uses SAPG and an asymmetric critic. Both tested removals produce substantially lower reward under matched settings. The figure does not isolate all choices: there is no complete ablation here for procedural diversity, LSTM memory, every randomization term or the perception pipeline. The nine-billion-step ablation horizon also differs from the 120-billion-step checkpoint study.
 
 Source: Simulation · Paper Fig. 8 · §IV-E
 
-## 28. References, videos and source material
+## 25. References, videos and source material
 
 Paper figures and project videos retain their original authorship. Custom diagrams are explanatory schematics. Real-world aggregate charts derive from the published Table II data, provided in CSV form alongside this deck. The discussion section explicitly labels untested extensions. The package also contains English speaker notes and a detailed Chinese narrative assessment.
 

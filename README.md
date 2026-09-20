@@ -1,6 +1,6 @@
 # SimToolReal Research Seminar
 
-English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 23 slides, plus 5 backup slides. Suggested length: 30–35 minutes including videos, plus discussion.
+English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 23 slides, plus 2 backup slides. Suggested length: 30–35 minutes including videos, plus discussion.
 
 The methodology-focused narrative starts with an open brainstorm, then examines demonstration bottlenecks. It restores the animated 6D pose sequence and explains simulation training before real deployment. The LSTM discussion covers observations, recurrent memory and arm/hand action processing. A simulation video leads into the gap between simulator ground truth and real state estimation. Six tool categories provide qualitative evidence, followed by one numerical overview and a combined discussion of three research directions.
 
@@ -10,6 +10,7 @@ The methodology-focused narrative starts with an open brainstorm, then examines 
 - [PDF](SimToolReal_slides.pdf): all builds visible, with video stills.
 - [Presenter page](index.html): English speaker notes and navigation.
 - [Speaker notes](speaker_notes.md).
+- [Chinese slide-matched presentation script](speaker_notes_zh.md).
 - [Detailed paper reading and narrative assessment (Chinese)](paper/narrative_assessment_zh.md).
 - [Published per-rollout data transcribed from Table II](paper/real_world_results.csv).
 - Editable diagrams: [simulation pipeline](assets/simulation_pipeline.svg), [LSTM memory](assets/lstm_memory.svg), [real deployment](assets/deployment_pipeline.svg).
@@ -27,11 +28,11 @@ The main talk uses nine silent author-provided clips at original speed: simulati
 
 - 1–3: cover, open brainstorm and demonstration bottlenecks.
 - 4–5: pose-reaching abstraction and animated position/orientation sequence.
-- 6–12: simulation-only pipeline, procedural tools, rewards, policy observations, LSTM memory, action processing and simulation video.
+- 6–12: simulation-only pipeline, procedural tools, exact reward construction, policy observations, LSTM memory, action processing and simulation video.
 - 13–16: ground-truth-to-estimation transition, real pipeline, event-driven goals and inference video.
 - 17–21: six-category video gallery, one quantitative overview, recovery and scope.
 - 22–23: the three research inspirations together and closing question.
-- 24–28: pose metric, brush baseline, specialists, RL ablations and references.
+- 24–25: RL ablations and references. The pose metric is integrated into the reward-construction page.
 
 ## Content boundaries
 
@@ -39,7 +40,7 @@ All paper results refer to arXiv v2 (24 February 2026). Real-robot and simulatio
 
 ## Edit and rebuild
 
-Source files are in `src/`. `src/build.mjs` holds the slide content and speaker notes. `src/visuals.mjs` contains editable SVG scientific schematics and the Table II data. `src/style.css` and `src/navigation.js` define appearance and interaction.
+Source files are in `src/`. `src/build.mjs` holds the slide content and English notes; `src/speaker-notes-zh.mjs` holds the page-aligned Chinese script. `src/visuals.mjs` contains editable SVG scientific schematics and the Table II data. `src/style.css` and `src/navigation.js` define appearance and interaction.
 
 ```bash
 npm install
