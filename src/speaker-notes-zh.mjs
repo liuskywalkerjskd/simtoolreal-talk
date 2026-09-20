@@ -55,6 +55,16 @@ note('SAPG splits exploration and aggregates experience','SAPG：拆分探索，
 直观上，普通 PPO 像一个探索者同时运行很多环境；SAPG 则让一组探索风格不同的策略分别寻找可行行为，再让 leader 吸收更广泛的经验。它适合这里的原因是灵巧手动作维度高、接触行为难探索，而且仿真一次可以并行运行上万个环境。`,
 '第一次前进键展示 Split：并行环境分配给 leader 和 followers；第二次展示 Aggregate：followers 的经验经过 importance weighting 汇入 leader update。'),
 
+note('SAPG learns more effectively than PPO in this setting','SAPG 与 PPO：相同 Critic 下的受控对比','约 75 秒',
+`这一页紧接上一页，回答一个自然问题：Split 和 Aggregate 在这个任务里是否真的比普通 PPO 更有效？
+
+先看青色和灰色曲线。两者都使用 asymmetric critic，主要差异是优化时的探索和数据使用方式。普通 PPO 依赖单个 policy 产生的 on-policy experience；SAPG 让多个探索风格不同的 policy 收集数据，然后用 importance weighting 将 follower experience 汇入 leader update。
+
+在这个 90 亿 environment steps 的消融中，SAPG 的 episode reward 持续上升，PPO 则停在明显更低的平台。这说明在高维灵巧操作的探索问题上，多样化探索和经验聚合确实有价值。
+
+橙色曲线又提供了一个边界：保留 SAPG 但换成 symmetric critic 后，学习仍然很差。因此更准确的结论是，论文支持 SAPG 与 asymmetric critic 的组合，而不是证明所有提升都只来自 SAPG。同时，纵轴是仿真中的 training reward，不是真机工具任务的功能成功率。`,
+'先揭示受控对比，再揭示实验解读；最后说明 symmetric critic 消融和指标边界。'),
+
 note('Procedural tools cover shape and mass variation','程序化工具覆盖几何与质量变化','约 80 秒',
 `训练分布由程序化工具提供。作者预先规定了 handle-head 这一结构先验，然后随机化尺寸、形状、密度以及相关物理属性。策略获得的是一个粗略 grasp-region box 和对象中心的位姿特征，不是完整 CAD mesh，也没有显式的质量或惯量估计。
 
@@ -186,12 +196,6 @@ note('A reusable motor skill needs a well-chosen task interface','总结：可�
 
 因此我认为这篇工作的核心贡献，不只是“用 RL 做工具操作”，而是提出并验证了一种清晰的任务接口分工。最后留一个讨论问题：对于更广泛的操作任务，哪些信息可以安全地压缩成可复用 goal interface，哪些又必须保留在闭环状态和 reward 里？`,
 '依次出现三条总结，最后停在讨论问题。'),
-
-note('Ablations identify important RL ingredients','备份：RL Ablation 揭示关键训练组件','约 60 秒（按需）',
-`这页只在被问到训练算法时展开。完整方法使用 SAPG 与 asymmetric critic。把 SAPG 换成 PPO，training reward 会下降；去掉 asymmetric critic 后学习受到更明显影响。曲线是五个随机种子的均值，并覆盖 90 亿 environment steps。
-
-这张图衡量的是仿真 training reward，不是现实世界 functional task completion。它也不是完整消融：论文没有在同一张表里逐项隔离 procedural diversity、LSTM、每一种 randomization 或 perception pipeline。这里的 90 亿步消融周期也和正文 checkpoint 研究中的 1200 亿步不同。`,
-'只在问答中打开；不要把 training reward 曲线解读成真实成功率。'),
 
 note('References, videos and source material','备份：论文、项目视频与相关工作','约 20 秒（按需）',
 `这一页汇总主论文、RSS proceedings、项目主页、代码，以及几篇直接相关的 object-centric dexterous manipulation 工作。Slides 中的论文图和项目视频保留原始作者归属；自行绘制的 pipeline 和示意图用于讲解。真实世界柱状图来自论文 Table II 的逐 rollout 数据重算。

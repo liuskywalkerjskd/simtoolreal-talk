@@ -1,6 +1,6 @@
 # SimToolReal 中文逐页汇报稿
 
-建议时长：正文 32–37 分钟（含视频），另加讨论。第 1–24 页为正文，第 25–26 页为备份。每页均与 slides.html 的页码和英文标题严格对应。
+建议时长：正文 33–38 分钟（含视频），另加讨论。第 1–25 页为正文，第 26 页为来源备份页。每页均与 slides.html 的页码和英文标题严格对应。
 
 ## 1. SimToolReal：从工具运动到机器人技能
 
@@ -98,7 +98,23 @@ SAPG 的全称是 Split and Aggregate Policy Gradients，可以把它理解成�
 
 **操作提示：** 第一次前进键展示 Split：并行环境分配给 leader 和 followers；第二次展示 Aggregate：followers 的经验经过 importance weighting 汇入 leader update。
 
-## 8. 程序化工具覆盖几何与质量变化
+## 8. SAPG 与 PPO：相同 Critic 下的受控对比
+
+**对应英文标题：** SAPG learns more effectively than PPO in this setting
+
+**建议时间：** 约 75 秒
+
+这一页紧接上一页，回答一个自然问题：Split 和 Aggregate 在这个任务里是否真的比普通 PPO 更有效？
+
+先看青色和灰色曲线。两者都使用 asymmetric critic，主要差异是优化时的探索和数据使用方式。普通 PPO 依赖单个 policy 产生的 on-policy experience；SAPG 让多个探索风格不同的 policy 收集数据，然后用 importance weighting 将 follower experience 汇入 leader update。
+
+在这个 90 亿 environment steps 的消融中，SAPG 的 episode reward 持续上升，PPO 则停在明显更低的平台。这说明在高维灵巧操作的探索问题上，多样化探索和经验聚合确实有价值。
+
+橙色曲线又提供了一个边界：保留 SAPG 但换成 symmetric critic 后，学习仍然很差。因此更准确的结论是，论文支持 SAPG 与 asymmetric critic 的组合，而不是证明所有提升都只来自 SAPG。同时，纵轴是仿真中的 training reward，不是真机工具任务的功能成功率。
+
+**操作提示：** 先揭示受控对比，再揭示实验解读；最后说明 symmetric critic 消融和指标边界。
+
+## 9. 程序化工具覆盖几何与质量变化
 
 **对应英文标题：** Procedural tools cover shape and mass variation
 
@@ -110,7 +126,7 @@ SAPG 的全称是 Split and Aggregate Policy Gradients，可以把它理解成�
 
 **操作提示：** 指出图中的小工具只是分布示意，不是论文资产的逐一复刻。
 
-## 9. RL 训练信号：每个 Reward 如何构造
+## 10. RL 训练信号：每个 Reward 如何构造
 
 **对应英文标题：** RL training signal: how each reward term is constructed
 
@@ -130,7 +146,7 @@ SAPG 的全称是 Split and Aggregate Policy Gradients，可以把它理解成�
 
 **操作提示：** 共四次揭示：1 smooth；2 grasp；3 goal 和 pose distance；4 最下方 reward 与 actor–critic objective 的区别。
 
-## 10. 策略观察紧凑的 Object-Centric State
+## 11. 策略观察紧凑的 Object-Centric State
 
 **对应英文标题：** The policy observes a compact, object-centric state
 
@@ -144,7 +160,7 @@ actor 不接收完整 mesh、显式质量、惯量或 privileged object velocity
 
 **操作提示：** 可以用“机器人自身—当前工具—当前目标”三层来口头归纳输入。
 
-## 11. LSTM 用历史信息补足部分可观测性
+## 12. LSTM 用历史信息补足部分可观测性
 
 **对应英文标题：** LSTM memory carries interaction history across steps
 
@@ -162,7 +178,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 前两次前进键展开 t 和 t+1；第三次解释 cell state；第四次解释 hidden state；第五次强调它们是历史摘要，而不是原始历史帧堆叠。
 
-## 12. Action Head 对手臂与手指采用不同控制方式
+## 13. Action Head 对手臂与手指采用不同控制方式
 
 **对应英文标题：** The action head controls the arm and hand differently
 
@@ -176,7 +192,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 先比较 incremental 与 absolute target，再揭示 EMA 和 fixed weights。
 
-## 13. 仿真效果：到达多样工具位姿
+## 14. 仿真效果：到达多样工具位姿
 
 **对应英文标题：** Simulation: reaching diverse tool poses
 
@@ -188,7 +204,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 播放 training 视频；必要时暂停在明显的手内调整处。
 
-## 14. 从仿真到现实：Ground Truth 变成状态估计
+## 15. 从仿真到现实：Ground Truth 变成状态估计
 
 **对应英文标题：** Simulation exposes the state. Reality requires estimation.
 
@@ -200,7 +216,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 先讲 simulator 一侧，再 reveal real robot 一侧与底部过渡句。
 
-## 15. 真实部署 Pipeline：向固定策略提供同样的接口
+## 16. 真实部署 Pipeline：向固定策略提供同样的接口
 
 **对应英文标题：** Real deployment supplies the same policy interface
 
@@ -214,7 +230,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 按 setup、goal extraction、online tracking、fixed actor 的顺序走完整张图。
 
-## 16. 目标切换由到达事件触发，而不是按演示时钟播放
+## 17. 目标切换由到达事件触发，而不是按演示时钟播放
 
 **对应英文标题：** The robot advances goals only after reaching them
 
@@ -228,7 +244,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 依次揭示三个频率，最后强调 goal switching 的触发条件。
 
-## 17. 闭环策略跟随未见过的工具轨迹
+## 18. 闭环策略跟随未见过的工具轨迹
 
 **对应英文标题：** The closed loop follows unseen tool trajectories
 
@@ -240,7 +256,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 播放 inference 视频，并指向人类演示、goal visualization 与 robot execution 三部分。
 
-## 18. 刷子与锤子：先调整工具，再执行交互
+## 19. 刷子与锤子：先调整工具，再执行交互
 
 **对应英文标题：** Brush and hammer: reorientation before interaction
 
@@ -252,7 +268,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 分别点击 Brush 和 Hammer 播放按钮；V 键控制最后选择的视频。
 
-## 19. 马克笔与橡皮：沿表面执行工具轨迹
+## 20. 马克笔与橡皮：沿表面执行工具轨迹
 
 **对应英文标题：** Marker and eraser: tool motion along a surface
 
@@ -264,7 +280,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 先播放 Marker，再播放 Eraser；让听众比较 tip-sensitive 与 area-contact 两种情况。
 
-## 20. 铲子与螺丝刀：更大的姿态变化
+## 21. 铲子与螺丝刀：更大的姿态变化
 
 **对应英文标题：** Spatula and screwdriver: larger orientation changes
 
@@ -276,7 +292,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 分别播放 Spatula 和 Screwdriver；明确 screwdriver 不是 fastening。
 
-## 21. 六类工具上的真实世界迁移
+## 22. 六类工具上的真实世界迁移
 
 **对应英文标题：** Real-world transfer across six tool categories
 
@@ -290,7 +306,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 简要读总体和趋势，不逐项念每个数字。
 
-## 22. 恢复行为体现反馈能力，也暴露边界
+## 23. 恢复行为体现反馈能力，也暴露边界
 
 **对应英文标题：** Recovery illustrates feedback, with clear limits
 
@@ -302,7 +318,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 播放 recovery 视频，随后停在三条限制上。
 
-## 23. 由该方法引出的三个研究方向
+## 24. 由该方法引出的三个研究方向
 
 **对应英文标题：** Three research directions suggested by the method
 
@@ -320,7 +336,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 三点依次揭示；开头先提醒这是 presenter hypotheses。
 
-## 24. 总结：可复用 Motor Skill 依赖合适的任务接口
+## 25. 总结：可复用 Motor Skill 依赖合适的任务接口
 
 **对应英文标题：** A reusable motor skill needs a well-chosen task interface
 
@@ -331,18 +347,6 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 因此我认为这篇工作的核心贡献，不只是“用 RL 做工具操作”，而是提出并验证了一种清晰的任务接口分工。最后留一个讨论问题：对于更广泛的操作任务，哪些信息可以安全地压缩成可复用 goal interface，哪些又必须保留在闭环状态和 reward 里？
 
 **操作提示：** 依次出现三条总结，最后停在讨论问题。
-
-## 25. 备份：RL Ablation 揭示关键训练组件
-
-**对应英文标题：** Ablations identify important RL ingredients
-
-**建议时间：** 约 60 秒（按需）
-
-这页只在被问到训练算法时展开。完整方法使用 SAPG 与 asymmetric critic。把 SAPG 换成 PPO，training reward 会下降；去掉 asymmetric critic 后学习受到更明显影响。曲线是五个随机种子的均值，并覆盖 90 亿 environment steps。
-
-这张图衡量的是仿真 training reward，不是现实世界 functional task completion。它也不是完整消融：论文没有在同一张表里逐项隔离 procedural diversity、LSTM、每一种 randomization 或 perception pipeline。这里的 90 亿步消融周期也和正文 checkpoint 研究中的 1200 亿步不同。
-
-**操作提示：** 只在问答中打开；不要把 training reward 曲线解读成真实成功率。
 
 ## 26. 备份：论文、项目视频与相关工作
 

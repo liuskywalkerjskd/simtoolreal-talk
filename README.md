@@ -1,6 +1,6 @@
 # SimToolReal Research Seminar
 
-English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 24 slides, plus 2 backup slides. Suggested length: 32–37 minutes including videos, plus discussion.
+English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 25 slides, plus 1 reference backup slide. Suggested length: 33–38 minutes including videos, plus discussion.
 
 The methodology-focused narrative starts with an open brainstorm, then examines demonstration bottlenecks. It restores the animated 6D pose sequence and explains simulation training before real deployment. The LSTM discussion covers observations, recurrent memory and arm/hand action processing. A simulation video leads into the gap between simulator ground truth and real state estimation. Six tool categories provide qualitative evidence, followed by one numerical overview and a combined discussion of three research directions.
 
@@ -28,11 +28,11 @@ The cover automatically loops a silent 10-second montage assembled from the offi
 
 - 1–3: cover, open brainstorm and demonstration bottlenecks.
 - 4–5: pose-reaching abstraction and animated position/orientation sequence.
-- 6–13: simulation-only pipeline, two-step SAPG explanation, procedural tools, exact reward construction, policy observations, LSTM memory, action processing and simulation video.
-- 14–17: ground-truth-to-estimation transition, real pipeline, event-driven goals and inference video.
-- 18–22: six-category video gallery, one quantitative overview, recovery and scope.
-- 23–24: the three research inspirations together and closing question.
-- 25–26: RL ablations and references. The pose metric is integrated into the reward-construction page.
+- 6–14: simulation-only pipeline, two-step SAPG explanation, controlled SAPG–PPO comparison, procedural tools, reward construction, policy architecture and simulation video.
+- 15–18: ground-truth-to-estimation transition, real pipeline, event-driven goals and inference video.
+- 19–23: six-category video gallery, one quantitative overview, recovery and scope.
+- 24–25: the three research inspirations together and closing question.
+- 26: references and source material. The pose metric remains integrated into the reward-construction page.
 
 ## Content boundaries
 

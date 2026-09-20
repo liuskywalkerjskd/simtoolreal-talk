@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.2.1] - 2026-09-20
+
+### Features
+
+- Move the RL ablation page directly after the SAPG explainer.
+- Reframe the page as a controlled SAPG-versus-PPO comparison with two reveal steps.
+- Keep only the references page in the backup section and realign both speaker-note files.
+
+### Design Rationale
+
+- Pair the algorithm mechanism with its experimental evidence before returning to the policy architecture.
+- Separate the matched asymmetric-critic comparison from the additional symmetric-critic ablation.
+
+### Notes & Caveats
+
+- The comparison reports simulation training reward over 9B environment steps, not real-world functional success.
+- The ablation supports the combined SAPG and asymmetric-critic recipe; it does not attribute every gain to SAPG alone.
+
 ## [3.2.0] - 2026-09-20
 
 ### Features
