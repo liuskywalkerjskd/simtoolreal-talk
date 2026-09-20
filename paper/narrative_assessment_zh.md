@@ -37,7 +37,7 @@
 
 工具扩展机器人对环境的作用方式，但抓住物体只是开端。以刷子为例，机器人需要从桌面拿起薄柄、在手内旋转到可用姿态，并在接触桌面时保持控制。这把 grasp acquisition、in-hand reorientation 与 environment interaction 连在同一个任务里。
 
-这里先展示项目视频，不急于讲网络。问题应该是“怎样获得整套能力”，而非一开始就问“该用什么模型”。
+开场先向听众提问“假如要让机器人学会使用工具，你会怎么做？”，再逐步揭示数据模仿、human retargeting 和 simulation learning 等路线。不急于讲网络，也不把问题限定为“该用什么模型”。
 
 ### 第二步：现有路线把困难放在什么地方？
 
@@ -82,6 +82,8 @@
 
 ### 第七步：真实部署如何恢复统一接口？
 
+先完整解释仿真训练和 LSTM，展示仿真 reaching 视频后，再用观测来源的变化过渡：仿真器能提供 ground truth，但真实机器人必须估计状态。需要强调，训练 actor 接收的是加入噪声/延迟的观测，不能把它误讲成直接依赖无误差真值的策略。
+
 1. 从初始 RGB-D 图像分割物体。附录使用 SAM 2 和用户点选，优先选择交互前、遮挡较少的帧。
 2. SAM 3D 重建物体 mesh，使用实际 depth 保证 metric scale。
 3. 多视角渲染 mesh，再通过 SAM 2 与用户点选分离 handle/head。
@@ -95,9 +97,9 @@
 
 ### 第八步：实验到底验证了什么？
 
-先定义 metric，再看数字。Task Progress 是目标序列中已经到达的位姿比例，评价阈值为四个 keypoints 中最大距离小于 2 cm。这个距离同时受到 translation 和 rotation 影响。
+组会正文先看六类工具的实机视频，再保留一页数字概览。Task Progress 是目标序列中已经到达的位姿比例，评价阈值为四个 keypoints 中最大距离小于 2 cm。这个距离同时受到 translation 和 rotation 影响。
 
-之后依次看三层证据：真实跨工具迁移、与动作执行方式的对比、仿真中相对 specialist 的泛化。最后以失败分析和作者限制连接到讨论。
+实机跨工具迁移作为正文重点；与动作执行方式的对比、仿真 specialist 与消融放在备份。视频是作者挑选的定性示例，不能代替随机试验统计。最后以 recovery 和作者限制连接到讨论。
 
 ## 4. 技术贡献与关键实现
 
@@ -128,6 +130,20 @@ r_{\mathrm{goal}}=\max(d^*-d(o_t,g),0)+B_{\mathrm{succ}}\mathbb I[d(o_t,g)<\epsi
 - 仿真/控制为 120/60 Hz；训练 pose tolerance 1 cm，实验评价 2 cm。
 
 避免把它描述成一个“极轻量 MLP”或“低计算成本”系统。Fig. 7 的训练横轴到 120 billion environment steps；论文相关图并不直接提供可由此推得的 wall-clock 成本。
+
+### 4.4 LSTM policy：观测、记忆与动作处理
+
+依据 Appendix C.2–C.3 和 Table I，策略输入包括：
+
+- Robot proprioception：29 个关节位置、29 个关节速度、上一时刻 joint targets、掌心位姿，以及 5 个指尖相对掌心的位置。
+- Tool / goal：工具朝向、4 个相对掌心的工具 keypoints、4 个 object-to-goal keypoint errors，以及 grasp region 的尺寸。
+- Observation keypoints 随工具实例的 grasp box 尺寸变化。Reward keypoints 使用固定尺度，二者不要混淆。
+
+以标准 LSTM 记号作解释，可写为 `(h_t, c_t) = LSTM(x_t, h_{t-1}, c_{t-1})`，MLP head 再将 recurrent features 映射为 29 维动作。论文报告 1024-unit LSTM 与 `[1024, 1024, 512, 512]` MLP。历史信息帮助处理未直接观测的物理与几何差异；论文没有证明某个 hidden unit 显式估计质量，也没有提出新的 LSTM gate。
+
+[作者公开配置](https://github.com/tylerlum/simtoolreal/blob/313d5aea1f507c6cfe097b672b62945d7b0bbff5/isaacgymenvs/cfg/train/SimToolRealLSTMAsymmetricPPO.yaml) 进一步确认 `layers: 1`、`before_mlp: True`、`layer_norm: True`，MLP activation 为 ELU。这里把配置核对作为架构细节的补充来源，不将其解读为新的论文实验结论。
+
+动作裁剪到 `[-1, 1]` 后分两路处理：7-DoF arm 使用相对上一 joint target 的增量，比例为 0.025；22-DoF hand 将输出映射到关节限制范围中的绝对位置。两路使用 EMA smoothing，α 为 0.1，并有 joint-limit clipping。最终以 60 Hz 发送 joint-position targets。部署时 hidden/cell state 会更新，policy weights 保持不变；不能把 recurrent state 更新讲成在线微调。
 
 ## 5. 实验事实
 
@@ -279,17 +295,17 @@ Fig. 8 的 5-seed 消融显示，在本文设置中移除 asymmetric critic 或�
 
 ## 9. Slides 内容安排
 
-2026-09-20 精简版：17 页正文 + 4 页备份，建议 20–25 分钟加讨论。
+2026-09-20 方法论版：23 页正文 + 5 页备份，建议含视频 30–35 分钟加讨论。
 
-- 1–3：封面、机器人操作困难、IL 与 human retargeting 的 brainstorm。
-- 4：独立一页提出 object-centric insight，以工具 6D pose 表达目标。
-- 5–6：重新绘制的系统架构、LSTM actor 输入输出与模块作用。
-- 7–9：通用训练、感知与事件驱动 goal switching、真实执行视频。
-- 10–14：评价定义与真实结果、brush baseline、仿真 specialist、失败与限制。
-- 15–16：合并三个研究假设，保留 VLM 与几何估计的职责区分。
-- 17：总结与讨论问题。
-- 18–21：pose metric、RL 消融、实现细节、参考资料。
+- 1–3：封面、开放 brainstorm、IL 与 human retargeting 的困难。
+- 4–5：object-centric insight，以及恢复的工具位置/朝向分步动画。
+- 6–12：仿真 pipeline、工具生成、reward、LSTM 观测/记忆/动作处理、仿真 reaching 视频。
+- 13–16：ground truth 到 state estimation 的过渡、真实部署 pipeline、事件驱动目标、inference 视频。
+- 17–19：六类工具的成对实机视频。
+- 20–21：一页定量概览，随后 recovery 与方法边界。
+- 22–23：三个研究启发集中讨论，总结收尾。
+- 24–28：pose metric、brush baseline、specialist、消融与参考资料。
 
-完整逐次实验数据仍保留在 CSV 中。IL 的局限限定为本文场景中的动作数据采集、embodiment gap 与接触迁移问题，不能据此声称论文证明了 IL/VLA 无效。系统架构图提供单独的可编辑 SVG。
+完整逐次实验数据仍保留在 CSV 中。IL 的局限限定为本文场景中的动作数据采集、embodiment gap 与接触迁移问题，不能据此声称论文证明了 IL/VLA 无效。仿真、LSTM memory、真实部署分别提供可编辑 SVG，正文的仿真阶段不提前引入 RGB-D。
 
 英文 speaker notes 给出了每页解释、转场与应避免的过度主张。图示中区分了 paper figure、presenter schematic、published-data aggregation 和 proposed extension。

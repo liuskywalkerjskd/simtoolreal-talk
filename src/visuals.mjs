@@ -7,6 +7,33 @@ export const results=[
  ['Screwdriver','Long','Spin vertical',[20.9,72.1,53.5,74.4,58.1]],['Screwdriver','Long','Spin horizontal',[48.4,86.7,83.3,3.3,86.7]],['Screwdriver','Short','Spin vertical',[15.4,61.5,12.8,100,0]],['Screwdriver','Short','Spin horizontal',[100,100,100,77.8,0]]
 ];
 export const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+export function simPipeline(){return svg(
+ txt(30,30,'SIMULATION ONLY',15,T)+rect(30,60,290,140)+txt(175,101,'Parallel environments',25,T,'middle')+txt(175,139,'Tool geometry + physics',20,M,'middle')+txt(175,172,'Random pose goals',20,M,'middle')+
+ line(335,129,445,129,T,true)+txt(390,105,'state',17,M,'middle')+
+ rect(465,65,265,130)+txt(597,110,'LSTM actor',27,T,'middle')+txt(597,149,'Limited observations',21,M,'middle')+txt(597,179,'With noise and delay',18,M,'middle')+
+ `<path d="M597 207V247H175V214" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+txt(377,280,'Joint targets change contacts and tool motion',20,M,'middle')+
+ g(rect(830,65,260,130,'#f1f5f3')+txt(960,110,'Asymmetric critic',24,T,'middle')+txt(960,149,'Clean simulator state',20,M,'middle')+
+ `<path d="M175 55V43H960V55" fill="none" stroke="${T}" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arr)"/>`+
+ txt(720,328,'SAPG updates the policy using simulated experience',22,T,'middle')+txt(720,362,'Critic supports training only',20,M,'middle'),1),390);}
+
+export function memory(){let s=txt(28,26,'THE SAME RECURRENT NETWORK AT EVERY CONTROL STEP',15,M);[190,550,910].forEach((x,i)=>{
+ const step=i===0?'t − 1':i===1?'t':'t + 1';
+ const cell=txt(x,76,'Observation x'+['ₜ₋₁','ₜ','ₜ₊₁'][i],22,T,'middle')+line(x,90,x,120,T,true)+rect(x-105,137,210,93)+txt(x,175,'LSTM [1024]',24,T,'middle')+txt(x,209,'time '+step,18,M,'middle')+
+ line(x,242,x,270,T,true)+txt(x+24,263,'MLP',16,M)+txt(x,305,'Action a'+['ₜ₋₁','ₜ','ₜ₊₁'][i],23,T,'middle');
+ s+=i?g(cell+line(x-240,181,x-121,181,T,true)+txt(x-181,151,'h, c',20,M,'middle'),i):cell;
+ });
+ s+=txt(560,370,'MLP action head: 1024 → 1024 → 512 → 512 → 29 outputs',21,T,'middle');return svg(s,400);}
+
+export function deployment(){return svg(
+ txt(25,25,'SETUP FOR A NEW TOOL / DEMONSTRATION',15,T)+
+ rect(25,50,245,92)+txt(147,85,'Human RGB-D video',22,T,'middle')+txt(147,119,'One demonstrated motion',17,M,'middle')+
+ line(283,96,325,96,T,true)+rect(340,50,310,92)+txt(495,85,'Prompted SAM 2 + SAM 3D',22,T,'middle')+txt(495,119,'Metric mesh + grasp box',18,M,'middle')+
+ line(662,96,704,96,T,true)+rect(720,50,370,92)+txt(905,85,'FoundationPose on the video',22,T,'middle')+txt(905,119,'Sequence of 6D goal poses',19,M,'middle')+
+ g(txt(25,217,'ONLINE EXECUTION',15,T)+rect(25,245,345,106)+txt(197,282,'Live RGB-D + object mesh',22,T,'middle')+txt(197,318,'FoundationPose: current tool pose',19,M,'middle')+
+ line(385,299,487,299,T,true)+rect(505,245,270,106)+txt(640,282,'Frozen LSTM policy',25,T,'middle')+txt(640,318,'Proprioception + grasp box',18,M,'middle')+
+ `<path d="M905 154V192H640V235" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+txt(808,181,'Current goal',17,M)+
+ line(788,299,845,299,T,true)+rect(860,245,230,106)+txt(975,287,'Arm + hand',25,T,'middle')+txt(975,321,'60 Hz control',19,M,'middle')+
+ `<path d="M975 362V404H197V363" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+txt(580,437,'Physical feedback supplies the next observation',20,M,'middle'),1),465);}
 // Three-phase overview: task specification and feedback condition a fixed actor.
 export function architecture(){return svg(
  rect(25,10,1065,112,'#f1f5f3')+txt(45,38,'1  TRAIN ONCE IN SIMULATION',15,T)+
