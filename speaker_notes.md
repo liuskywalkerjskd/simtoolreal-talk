@@ -1,10 +1,10 @@
 # SimToolReal · English Speaker Notes
 
-Suggested duration: 32–37 minutes including videos, plus discussion. Slides 1–24 are the main talk. Slide 25 is the reference backup. Use Right / Space for step reveals, A to reveal a whole page, F for fullscreen, and V for video play/pause. On paired video pages, click the desired tool button first; V then controls that selected video. Clips are silent and run at original speed.
+Suggested duration: 32–37 minutes including looping GIFs, plus discussion. Slides 1–24 are the main talk. Slide 25 is the reference backup. Use Right / Space for step reveals, A to reveal a whole page, and F for fullscreen. Experiment GIFs loop automatically, are silent and preserve the original playback speed.
 
 ## 1. SimToolReal
 
-The cover montage cycles through real robot experiments with a brush, hammer, marker and spatula. Use it to establish the physical setting before introducing the central question: how can one dexterous controller transfer across unfamiliar tools and goal trajectories? SimToolReal trains such a controller on simple synthetic tools in simulation. At deployment, human demonstrations provide object motion goals, while the robot decides how its own hand and arm should realize them. We will ask how to teach tool use, then formulate a pose-reaching problem and study its simulation-trained recurrent policy. Only after seeing simulation behavior will we introduce the real-world perception pipeline. Several tool videos illustrate transfer before a short quantitative summary and discussion. The paper is listed in the RSS 2026 proceedings.
+The cover GIF loops through real robot experiments with a brush, hammer, marker and spatula. Use it to establish the physical setting before introducing the central question: how can one dexterous controller transfer across unfamiliar tools and goal trajectories? SimToolReal trains such a controller on simple synthetic tools in simulation. At deployment, human demonstrations provide object motion goals, while the robot decides how its own hand and arm should realize them. We will ask how to teach tool use, then formulate a pose-reaching problem and study its simulation-trained recurrent policy. Only after seeing simulation behavior will we introduce the real-world perception pipeline. Several looping experiment GIFs illustrate transfer before a short quantitative summary and discussion. The paper is listed in the RSS 2026 proceedings.
 
 Source: Kedia et al. · SimToolReal · arXiv:2602.16863v2
 
@@ -76,9 +76,9 @@ Source: Paper Appendix C.2 · Eqs. 10–11 · Table I
 
 ## 13. Simulation: reaching diverse tool poses
 
-Play the training excerpt. Direct attention to the changing relationship between fingers and object as the policy reaches targets. The green object is a target visualization, not a second physical object. This clip illustrates what the training environment looks like. It does not independently quantify training efficiency or prove generalization.
+The training GIF loops automatically. Direct attention to the changing relationship between fingers and object as the policy reaches targets. The green object is a target visualization, not a second physical object. This clip illustrates what the training environment looks like. It does not independently quantify training efficiency or prove generalization.
 
-Source: Official project video · training.mp4 · Paper §III-B
+Source: Official project video · training.gif converted from training.mp4 · Paper §III-B
 
 ## 14. Simulation exposes the state. Reality requires estimation.
 
@@ -100,27 +100,27 @@ Source: Paper §III-C · Table I · Goal Pose Sequence appendix · Presenter sch
 
 ## 17. The closed loop follows unseen tool trajectories
 
-The project video places the human demonstration and extracted goal poses alongside real robot execution. Use it to connect the two branches of the pipeline. The robot policy does not update its weights on this new trajectory. Goal progression is event-driven, as described on the preceding slide. Treat the rendered goal display as an explanatory visualization, not additional evidence from a digital-twin experiment.
+The looping project GIF places the human demonstration and extracted goal poses alongside real robot execution. Use it to connect the two branches of the pipeline. The robot policy does not update its weights on this new trajectory. Goal progression is event-driven, as described on the preceding slide. Treat the rendered goal display as an explanatory visualization, not additional evidence from a digital-twin experiment.
 
-Source: Official project video · inference.mp4 · Paper §III-C
+Source: Official project video · inference.gif converted from inference.mp4 · Paper §III-C
 
 ## 18. Brush and hammer: reorientation before interaction
 
-Play the brush and hammer clips separately so the audience can track the fingers. Ask what the recurrent controller must do beyond moving the wrist. Both require acquiring a tool and changing its orientation relative to the hand. These author-provided category montages show real behavior at original speed. They are illustrative selections rather than random evaluation samples. Do not infer impact force or aggregate reliability from the montage. Click a tool's play button to choose it. V then controls the most recently selected video.
+The brush and hammer GIFs loop side by side so the audience can compare finger motion without manual playback. Ask what the recurrent controller must do beyond moving the wrist. Both require acquiring a tool and changing its orientation relative to the hand. These author-provided category montages show real behavior at original speed. They are illustrative selections rather than random evaluation samples. Do not infer impact force or aggregate reliability from the montage.
 
-Source: Real robot · Official project category videos · 1× speed · Qualitative examples
+Source: Real robot · Looping GIFs converted from official category videos · 1× speed · Qualitative examples
 
 ## 19. Marker and eraser: tool motion along a surface
 
 Compare the geometry and contact demands in the two clips. A marker is thin and requires tip positioning, whereas an eraser presents a larger contact region. The same actor handles both through the pose and grasp-region interface. The human supplies the demonstrated trajectory and perception supplies the tool state. The policy has no explicit representation of ink or erasing quality. Visible writing and wiping illustrate behavior but do not turn the benchmark pose-progress metric into a functional-success measure.
 
-Source: Real robot · Official project category videos · 1× speed · Qualitative examples
+Source: Real robot · Looping GIFs converted from official category videos · 1× speed · Qualitative examples
 
 ## 20. Spatula and screwdriver: larger orientation changes
 
 These clips emphasize orientation control, especially large flips and continuous rotations. Ask the audience to watch whether the fingers change contact while the tool turns. The benchmark includes serving or flipping with spatulas and free-space spinning with screwdrivers. It does not evaluate fastening a screw. The screwdriver is also a challenging case for visual tracking because symmetry can make orientation ambiguous. These examples motivate both the compact pose interface and its limitations for force-sensitive functional tasks.
 
-Source: Real robot · Official project category videos · Screwdriver task is free-space spinning
+Source: Real robot · Looping GIFs converted from official category videos · Screwdriver task is free-space spinning
 
 ## 21. Real-world transfer across six tool categories
 
@@ -130,9 +130,9 @@ Source: Real robot · Presenter aggregation of Table II · 20 trials per categor
 
 ## 22. Recovery illustrates feedback, with clear limits
 
-This clip brings the emphasis back from average performance to the role of feedback. The authors observe regrasp attempts even though training resets after drops. Keep the claim conditional: useful state feedback and a reachable object remain necessary. The policy does not explicitly plan around scene obstacles or optimize functional contact forces. Rigid tools and a fixed goal sequence also limit the scope. These qualifications motivate the three research inspirations on the next page. A selected recovery clip is not a systematic robustness evaluation.
+The recovery GIF loops automatically and brings the emphasis back from average performance to the role of feedback. The authors observe regrasp attempts even though training resets after drops. Keep the claim conditional: useful state feedback and a reachable object remain necessary. The policy does not explicitly plan around scene obstacles or optimize functional contact forces. Rigid tools and a fixed goal sequence also limit the scope. These qualifications motivate the three research inspirations on the next page. A selected recovery clip is not a systematic robustness evaluation.
 
-Source: Official project recovery video · Paper §IV-A and §V · Qualitative behavior
+Source: Looping GIF converted from the official recovery video · Paper §IV-A and §V · Qualitative behavior
 
 ## 23. Three research directions suggested by the method
 

@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.3.0] - 2026-09-20
+
+### Features
+
+- Convert the cover montage and all nine experiment clips used by the deck into automatically looping GIFs.
+- Remove manual play buttons, native video controls and the V-key playback shortcut.
+- Add a reproducible FFmpeg conversion script and retain static poster frames for PDF export.
+
+### Design Rationale
+
+- Keep experiment motion visible during the talk without requiring the presenter to start or switch media manually.
+- Encode at the largest useful on-slide resolution rather than preserving unused source pixels.
+
+### Notes & Caveats
+
+- GIF supports only 256 colors. Per-clip palettes, Lanczos scaling and Sierra dithering reduce visible banding, but GIF cannot reproduce the source MP4 color depth exactly.
+- The ten GIF files total about 126 MB. The original MP4 files remain available for provenance and regeneration.
+
 ## [3.2.2] - 2026-09-20
 
 ### Features

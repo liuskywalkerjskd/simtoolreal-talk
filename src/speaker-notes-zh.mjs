@@ -5,7 +5,7 @@ note('SimToolReal','SimToolReal：从工具运动到机器人技能','约 50 秒
 `大家好，今天汇报的工作是 SimToolReal。右侧循环展示了刷子、锤子、马克笔和铲子四类真实机器人实验，先让大家直观看到这篇工作希望统一处理的场景。它关心的不是如何为一把特定的锤子训练一套动作，而是一个更一般的问题：如果我们只告诉机器人“工具应该怎样运动”，能不能让同一个灵巧操作策略自己决定手臂和手指应该怎样配合？
 
 论文的核心做法是，在仿真中用大量程序化工具和随机位姿目标训练一个 object-centric recurrent policy。到了真实世界，人类演示只负责给出工具的目标运动，视觉系统负责估计当前工具位姿，而策略本身不再针对新工具或新任务做训练。接下来我会先从“我们通常会怎么教机器人使用工具”开始，再逐步进入位姿跟踪、仿真训练、LSTM 策略、真实部署和实验。`,
-'让封面视频循环一遍或至少展示两类工具，再强调 reusable controller 与 tool motion 两个关键词。'),
+'封面 GIF 会自动循环。至少展示两类工具后，再强调 reusable controller 与 tool motion 两个关键词。'),
 
 note('How would you teach a robot to use tools?','如果让机器人学会使用工具，你会怎么做？','约 90 秒',
 `先不看论文，我想请大家思考一个问题：假设现在要让机器人学会使用一把新的刷子、锤子或铲子，你会先搭建什么？
@@ -108,10 +108,10 @@ note('The action head controls the arm and hand differently','Action Head 对手
 '先比较 incremental 与 absolute target，再揭示 EMA 和 fixed weights。'),
 
 note('Simulation: reaching diverse tool poses','仿真效果：到达多样工具位姿','约 90 秒',
-`现在看一段仿真视频。绿色 mesh 表示当前目标位姿，而不是第二个实体工具。请大家重点观察两点：第一，策略需要先获取工具，再逐渐调整手指与工具之间的相对关系；第二，目标变化以后，它会继续完成新的 reorientation，而不是只学会一个固定抓取姿态。
+`现在看一段自动循环的仿真 GIF。绿色 mesh 表示当前目标位姿，而不是第二个实体工具。请大家重点观察两点：第一，策略需要先获取工具，再逐渐调整手指与工具之间的相对关系；第二，目标变化以后，它会继续完成新的 reorientation，而不是只学会一个固定抓取姿态。
 
 这段视频说明训练环境和策略行为长什么样，但它本身不是泛化能力或训练效率的定量证据。再次强调，这个训练 loop 中没有人类任务轨迹。`,
-'播放 training 视频；必要时暂停在明显的手内调整处。'),
+'Training GIF 会自动循环；在明显的手内调整阶段提示听众重点观察。'),
 
 note('Simulation exposes the state. Reality requires estimation.','从仿真到现实：Ground Truth 变成状态估计','约 75 秒',
 `到这里，仿真中的问题已经解决了一半：如果我们能够获得工具当前位姿、几何描述和目标位姿，actor 就可以闭环控制。但真实世界并不会直接返回这些 ground truth。工具可能被遮挡，位姿隐藏在 RGB-D 图像中，新工具的几何也未知。
@@ -136,28 +136,28 @@ note('The robot advances goals only after reaching them','目标切换由到达�
 '依次揭示三个频率，最后强调 goal switching 的触发条件。'),
 
 note('The closed loop follows unseen tool trajectories','闭环策略跟随未见过的工具轨迹','约 90 秒',
-`这段 inference 视频把人类演示、提取的目标位姿和真实机器人执行放在一起。人类规定工具运动，而机器人没有复制人的指关节轨迹；固定策略根据自己当前的工具状态，决定怎样抓取、调整和移动。
+`这段自动循环的 inference GIF 把人类演示、提取的目标位姿和真实机器人执行放在一起。人类规定工具运动，而机器人没有复制人的指关节轨迹；固定策略根据自己当前的工具状态，决定怎样抓取、调整和移动。
 
 这里“unseen”或者“zero-shot”的含义，是这段目标轨迹和这件真实工具没有用于重新训练 policy。它不表示完全没有人类演示，也不表示感知模块不需要为工具做 setup。大家可以把视频与上一页的 event-driven switching 联系起来看：目标是按到达状态推进的，而不是按原视频时间轴硬播放。`,
-'播放 inference 视频，并指向人类演示、goal visualization 与 robot execution 三部分。'),
+'Inference GIF 会自动循环；依次指向人类演示、goal visualization 与 robot execution 三部分。'),
 
 note('Brush and hammer: reorientation before interaction','刷子与锤子：先调整工具，再执行交互','约 90 秒',
 `接下来三页主要看真实世界行为，数据表只保留一页。刷子和锤子的共同点是，在真正扫动或挥动之前，都需要先建立稳定抓取并改变工具相对手掌的朝向。
 
-播放时可以观察手指是否在工具转动过程中改变接触，以及手腕运动和手内调整如何配合。锤子视频能够说明 pose-control 行为，但不能仅凭 montage 推断冲击力是否准确；刷子视频同样不能单独代表整体成功率。这些都是作者挑选的定性展示。`,
-'分别点击 Brush 和 Hammer 播放按钮；V 键控制最后选择的视频。'),
+两个 GIF 会并排自动循环。观察手指是否在工具转动过程中改变接触，以及手腕运动和手内调整如何配合。锤子 GIF 能够说明 pose-control 行为，但不能仅凭 montage 推断冲击力是否准确；刷子 GIF 同样不能单独代表整体成功率。这些都是作者挑选的定性展示。`,
+'对照观察 Brush 与 Hammer，重点比较抓取建立和姿态调整过程。'),
 
 note('Marker and eraser: tool motion along a surface','马克笔与橡皮：沿表面执行工具轨迹','约 90 秒',
 `马克笔和橡皮都需要沿表面运动，但几何和接触条件不同。马克笔细，tip placement 更敏感；橡皮的接触区域更大，擦拭路径相对宽容。同一个 actor 通过工具位姿和 grasp-region interface 处理这两类对象。
 
 需要注意，policy 没有显式表示“墨水写出来没有”或者“字擦干净没有”。视觉上能看到书写与擦拭行为，但论文的统一指标仍是完成了多少 sequential pose goals，而不是功能结果的直接测量。`,
-'先播放 Marker，再播放 Eraser；让听众比较 tip-sensitive 与 area-contact 两种情况。'),
+'两个 GIF 会并排自动循环；让听众比较 tip-sensitive 与 area-contact 两种情况。'),
 
 note('Spatula and screwdriver: larger orientation changes','铲子与螺丝刀：更大的姿态变化','约 90 秒',
 `铲子和螺丝刀更突出 orientation control。铲取、翻转和装盘动作会经历较大的姿态变化；螺丝刀任务要求在自由空间重定向并旋转工具。
 
 这里必须准确描述任务范围：论文中的 screwdriver benchmark 是 free-space spinning，不是把螺丝拧入工件，也没有评价扭矩。螺丝刀的近轴对称几何还会增加视觉 pose tracking 的歧义。这些例子既说明紧凑 6D pose interface 的能力，也说明它对力敏感功能任务的覆盖仍有限。`,
-'分别播放 Spatula 和 Screwdriver；明确 screwdriver 不是 fastening。'),
+'两个 GIF 会并排自动循环；明确 screwdriver 展示的是 free-space spinning，而不是 fastening。'),
 
 note('Real-world transfer across six tool categories','六类工具上的真实世界迁移','约 90 秒',
 `定量结果集中在这一页。DexToolBench 包含六类工具，每类两个 instance、两条 trajectory，每个 object-task variation 做五次 rollout，总计 120 次。
@@ -168,10 +168,10 @@ note('Real-world transfer across six tool categories','六类工具上的真实�
 '简要读总体和趋势，不逐项念每个数字。'),
 
 note('Recovery illustrates feedback, with clear limits','恢复行为体现反馈能力，也暴露边界','约 90 秒',
-`这段 recovery 视频说明 recurrent closed-loop policy 在发生误差后有时会尝试重新抓取。它不是只按预先录好的 open-loop action sequence 播放，而会根据当前状态继续控制。
+`这段自动循环的 recovery GIF 说明 recurrent closed-loop policy 在发生误差后有时会尝试重新抓取。它不是只按预先录好的 open-loop action sequence 播放，而会根据当前状态继续控制。
 
 但这个结论需要保持条件化：工具必须仍在可达范围内，而且视觉跟踪仍然可靠。训练中 drop 后会 reset，因此视频中的恢复不能等同于系统性鲁棒性评估。方法也没有显式的障碍物规划、功能接触力控制或高层任务 replanning；刚性工具假设和固定目标序列仍然限制了适用范围。`,
-'播放 recovery 视频，随后停在三条限制上。'),
+'Recovery GIF 会自动循环；观察一次恢复过程后，将注意力转向三条限制。'),
 
 note('Three research directions suggested by the method','由该方法引出的三个研究方向','约 180 秒',
 `下面三点是我基于论文的延伸思考，不是作者已经验证的结果。

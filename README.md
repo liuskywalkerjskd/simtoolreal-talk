@@ -2,12 +2,12 @@
 
 English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 24 slides, plus 1 reference backup slide. Suggested length: 32–37 minutes including videos, plus discussion.
 
-The methodology-focused narrative starts with an open brainstorm, then examines demonstration bottlenecks. It restores the animated 6D pose sequence and explains simulation training before real deployment. The LSTM discussion covers observations, recurrent memory and arm/hand action processing. A simulation video leads into the gap between simulator ground truth and real state estimation. Six tool categories provide qualitative evidence, followed by one numerical overview and a combined discussion of three research directions.
+The methodology-focused narrative starts with an open brainstorm, then examines demonstration bottlenecks. It restores the animated 6D pose sequence and explains simulation training before real deployment. The LSTM discussion covers observations, recurrent memory and arm/hand action processing. A looping simulation GIF leads into the gap between simulator ground truth and real state estimation. Six tool categories provide qualitative evidence, followed by one numerical overview and a combined discussion of three research directions.
 
 ## Open the presentation
 
-- [Slides](slides.html): animations and local videos. Open in Chrome or Edge.
-- [PDF](SimToolReal_slides.pdf): all builds visible, with video stills.
+- [Slides](slides.html): animations and local looping GIFs. Open in Chrome or Edge.
+- [PDF](SimToolReal_slides.pdf): all builds visible, with static poster frames for GIFs.
 - [Presenter page](index.html): English speaker notes and navigation.
 - [Speaker notes](speaker_notes.md).
 - [Chinese slide-matched presentation script](speaker_notes_zh.md).
@@ -20,9 +20,9 @@ No web connection is required to present the HTML deck. Keep `slides.html`, `ass
 
 ## Controls
 
-Right / Space advances a build or a slide. Left reverses a build. `A` reveals the current slide. `F` enters fullscreen. `V` plays or pauses the selected video. On paired tool pages, click the desired tool's play button first. Selecting another video pauses the previous one. Content videos never autoplay and pause when leaving their slide; only the silent cover montage loops automatically. Native controls, including video fullscreen, remain available. Click a paper figure to enlarge; Escape closes it. The bottom toolbar appears on hover.
+Right / Space advances a build or a slide. Left reverses a build. `A` reveals the current slide. `F` enters fullscreen. All experiment GIFs play and loop automatically, so no media controls are required. Click a paper figure to enlarge; Escape closes it. The bottom toolbar appears on hover.
 
-The cover automatically loops a silent 10-second montage assembled from the official brush, hammer, marker and spatula experiments. The main talk uses nine silent author-provided clips at original speed: simulation, inference, brush, hammer, marker, eraser, spatula, screwdriver and recovery. The earlier difficulty clip remains as an optional asset. Original source links and the cover transformation are documented in `assets/videos/README.md`. The category montages illustrate behavior and are not random evaluation samples. PDF uses a four-tool poster frame because it cannot play videos.
+The cover automatically loops a silent 10-second GIF assembled from the official brush, hammer, marker and spatula experiments. The main talk uses nine silent looping GIFs at original speed: simulation, inference, brush, hammer, marker, eraser, spatula, screwdriver and recovery. Each GIF is 720 pixels wide at 18 fps and uses a per-clip optimized 256-color palette. The original MP4 presentation copies remain alongside the GIFs for provenance and regeneration. The earlier difficulty clip remains an optional MP4 asset. Original source links and the cover transformation are documented in `assets/videos/README.md`. The category montages illustrate behavior and are not random evaluation samples. PDF uses static poster frames.
 
 ## Talk map
 
@@ -45,9 +45,10 @@ Source files are in `src/`. `src/build.mjs` holds the slide content and English 
 ```bash
 npm install
 npm run build
+npm run media:gif
 ```
 
-Rebuilding HTML does not update the PDF automatically. Export with browser print at the supplied CSS page size (1280 × 720), background graphics enabled, margins disabled. The included PDF was exported with headless Chrome.
+`npm run media:gif` requires `ffmpeg` and regenerates the ten GIFs used by the deck. Rebuilding HTML does not update the PDF automatically. Export with browser print at the supplied CSS page size (1280 × 720), background graphics enabled, margins disabled. The included PDF was exported with headless Chrome.
 
 ## Sources
 
