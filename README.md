@@ -31,7 +31,7 @@ The cover automatically loops a silent 10-second GIF assembled from the official
 - 6–13: simulation-only pipeline, two-step SAPG explanation, controlled SAPG–PPO comparison, procedural tools, reward construction, LSTM policy, action processing and simulation video.
 - 14–17: ground-truth-to-estimation transition, real pipeline, event-driven goals and inference video.
 - 18–22: six-category video gallery, one quantitative overview, recovery and scope.
-- 23–24: the three research inspirations together and closing question.
+- 23–24: three research directions followed by one broad presenter reflection.
 - 25: references and source material. The pose metric remains integrated into the reward-construction page.
 
 ## Content boundaries

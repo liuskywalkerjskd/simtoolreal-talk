@@ -140,11 +140,11 @@ Discuss the user's three inspirations together. First, structured simulation and
 
 Source: Presenter discussion · Grounded in the method and acknowledged limitations
 
-## 24. A reusable motor skill needs a well-chosen task interface
+## 24. Structured simulation as a route to reusable robot skills
 
-Close by returning to the initial question about how robots can acquire tool-use skills. This paper demonstrates an effective division of labor: human object-motion specification, geometric perception and a simulation-trained motor controller. The most general lesson is about interface design, not a claim that all robotics problems reduce to pose tracking. Invite discussion on how to identify sufficient state and objectives for broader interactions.
+Close with one presenter reflection rather than another method recap. SimToolReal suggests a complementary route to broadly useful robot skills: use structured simulation to learn reusable physical competence, then let perception and object-level goals adapt that competence to new tools and trajectories. This differs from learning every task end to end from robot action demonstrations. Keep the claim forward-looking. The paper demonstrates a transferable motor controller inside a carefully designed interface. It does not demonstrate autonomous discovery of new tasks, goals or rewards in the wild.
 
-Source: Paper contributions and presenter synthesis
+Source: Presenter reflection · Motivated by the paper’s modular skill interface
 
 ## 25. References, videos and source material
 

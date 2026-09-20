@@ -1,1 +1,1 @@
-{"name":"simtoolreal-seminar","version":"3.3.0","private":true,"type":"module","scripts":{"build":"node src/build.mjs","media:gif":"sh scripts/convert-videos-to-gif.sh"},"dependencies":{"katex":"0.18.7"}}
+{"name":"simtoolreal-seminar","version":"3.3.1","private":true,"type":"module","scripts":{"build":"node src/build.mjs","media:gif":"sh scripts/convert-videos-to-gif.sh"},"dependencies":{"katex":"0.18.7"}}

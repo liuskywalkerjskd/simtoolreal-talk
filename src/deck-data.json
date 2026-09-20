@@ -184,12 +184,12 @@
     "cls": "discussion-slide"
   },
   {
-    "section": "05 / Takeaways",
-    "title": "A reusable motor skill needs a well-chosen task interface",
-    "body": "<div class=\"number-list\"><span class=\"num\">01</span><div><h3>Specify motion at the object level</h3><p>Human video supplies goals without prescribing robot finger motion.</p></div><span class=\"num\">02</span><div><h3>Learn the controller over varied physics</h3><p>Procedural primitives and random goals support policy reuse.</p></div><span class=\"num\">03</span><div><h3>Preserve the boundary of the evidence</h3><p>Strong trajectory transfer still leaves perception, force and replanning open.</p></div></div><div class=\"fragment\" data-step=\"1\"><p class=\"quote\">Which parts of a manipulation task can we safely compress into a reusable goal interface?</p></div>",
-    "note": "Close by returning to the initial question about how robots can acquire tool-use skills. This paper demonstrates an effective division of labor: human object-motion specification, geometric perception and a simulation-trained motor controller. The most general lesson is about interface design, not a claim that all robotics problems reduce to pose tracking. Invite discussion on how to identify sufficient state and objectives for broader interactions.",
-    "source": "Paper contributions and presenter synthesis",
-    "cls": ""
+    "section": "05 / Takeaway",
+    "title": "Structured simulation as a route to reusable robot skills",
+    "body": "<div class=\"reflection-wrap\"><div class=\"scope-label\">Presenter reflection</div><p class=\"reflection-statement\">Beyond scaling end-to-end action models, <span>structured simulation</span> may offer another path toward skill acquisition in the wild.</p><p class=\"reflection-support\">SimToolReal separates motor competence from task specification: RL learns how to act, while perception and demonstrations specify the tool motion.</p><p class=\"reflection-caveat\">SimToolReal demonstrates the motor-skill component. Autonomous goal discovery remains future work.</p></div>",
+    "note": "Close with one presenter reflection rather than another method recap. SimToolReal suggests a complementary route to broadly useful robot skills: use structured simulation to learn reusable physical competence, then let perception and object-level goals adapt that competence to new tools and trajectories. This differs from learning every task end to end from robot action demonstrations. Keep the claim forward-looking. The paper demonstrates a transferable motor controller inside a carefully designed interface. It does not demonstrate autonomous discovery of new tasks, goals or rewards in the wild.",
+    "source": "Presenter reflection · Motivated by the paper’s modular skill interface",
+    "cls": "reflection-slide"
   },
   {
     "section": "Backup",

@@ -185,11 +185,13 @@ note('Three research directions suggested by the method','由该方法引出的�
 一个可执行的后续实验是保持 actor 完全冻结，只把人工 prompt 替换为 VLM 的区域与子目标建议，然后同时测 setup 时间、pose error、failure recovery 和真正的 functional completion。`,
 '三点依次揭示；开头先提醒这是 presenter hypotheses。'),
 
-note('A reusable motor skill needs a well-chosen task interface','总结：可复用 Motor Skill 依赖合适的任务接口','约 75 秒',
-`最后总结三点。第一，人类演示在 object level 指定运动，不必规定机器人手指动作。第二，程序化工具、随机物理和随机目标让 RL 学到一个可复用控制器，而不是为每个工具单独训练。第三，证据边界要保留：论文展示了很强的轨迹迁移，但 perception、functional force、clutter 和 replanning 仍然是开放问题。
+note('Structured simulation as a route to reusable robot skills','总结：结构化仿真可能是获得通用机器人技能的另一条路径','约 75 秒',
+`最后不再重复前面已经讲过的方法细节，只保留一个更概括的个人思考。
 
-因此我认为这篇工作的核心贡献，不只是“用 RL 做工具操作”，而是提出并验证了一种清晰的任务接口分工。最后留一个讨论问题：对于更广泛的操作任务，哪些信息可以安全地压缩成可复用 goal interface，哪些又必须保留在闭环状态和 reward 里？`,
-'依次出现三条总结，最后停在讨论问题。'),
+当前很多工作尝试通过扩大端到端 action model、增加真实机器人数据，让一个大模型覆盖更多任务。SimToolReal 提示了另一条可能的路线：先在结构化仿真中学习稳定、可复用的底层 motor competence，再让 perception、human demonstration 或更高层模型负责给出 object-level goals。也就是说，底层策略负责“怎样把动作做出来”，上层系统负责“工具接下来应该去哪里”。
+
+这种分工也许能够减少每个新任务都重新收集大量机器人动作数据的需求，并成为机器人在开放环境中获得技能的一部分。不过这里必须保留边界：SimToolReal 只验证了可迁移 motor controller，还没有解决机器人怎样自主发现任务、生成目标或者设计 reward。因此这一页表达的是由论文引出的研究判断，不是论文已经证明的最终结论。`,
+'用这一个观点收束汇报，不再逐条回顾 pipeline、SAPG 或 LSTM。'),
 
 note('References, videos and source material','备份：论文、项目视频与相关工作','约 20 秒（按需）',
 `这一页汇总主论文、RSS proceedings、项目主页、代码，以及几篇直接相关的 object-centric dexterous manipulation 工作。Slides 中的论文图和项目视频保留原始作者归属；自行绘制的 pipeline 和示意图用于讲解。真实世界柱状图来自论文 Table II 的逐 rollout 数据重算。

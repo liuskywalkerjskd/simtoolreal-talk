@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.3.1] - 2026-09-20
+
+### Features
+
+- Replace the three-item Takeaway recap with one broad presenter reflection.
+- Reframe the conclusion around structured simulation as a complementary route to reusable robot skills.
+- Update the Chinese presentation script to close on the same single idea.
+
+### Design Rationale
+
+- Let the preceding methodology and discussion pages carry the technical detail.
+- End with a memorable research judgment instead of repeating the pipeline in abbreviated form.
+
+### Notes & Caveats
+
+- The final slide labels the claim as a presenter reflection.
+- Autonomous task discovery and goal generation remain open problems rather than demonstrated paper results.
+
 ## [3.3.0] - 2026-09-20
 
 ### Features
