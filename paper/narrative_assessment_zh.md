@@ -279,12 +279,17 @@ Fig. 8 的 5-seed 消融显示，在本文设置中移除 asymmetric critic 或�
 
 ## 9. Slides 内容安排
 
-- 1–7：工具场景、困难与技术路线比较。
-- 8–11：object-centric insight、6D pose 与共同几何接口。
-- 12–20：训练、reward、RL、感知、频率及 zero-shot 的准确含义。
-- 21–28：评价指标、真实结果、baselines、仿真 specialist、失败与限制。
-- 29–32：三个假设及可验证实验。
-- 33：总结与讨论问题。
-- 34–39：pose metric、RL 消融、实现细节、完整任务平均值、参考资料。
+2026-09-20 精简版：17 页正文 + 4 页备份，建议 20–25 分钟加讨论。
+
+- 1–3：封面、机器人操作困难、IL 与 human retargeting 的 brainstorm。
+- 4：独立一页提出 object-centric insight，以工具 6D pose 表达目标。
+- 5–6：重新绘制的系统架构、LSTM actor 输入输出与模块作用。
+- 7–9：通用训练、感知与事件驱动 goal switching、真实执行视频。
+- 10–14：评价定义与真实结果、brush baseline、仿真 specialist、失败与限制。
+- 15–16：合并三个研究假设，保留 VLM 与几何估计的职责区分。
+- 17：总结与讨论问题。
+- 18–21：pose metric、RL 消融、实现细节、参考资料。
+
+完整逐次实验数据仍保留在 CSV 中。IL 的局限限定为本文场景中的动作数据采集、embodiment gap 与接触迁移问题，不能据此声称论文证明了 IL/VLA 无效。系统架构图提供单独的可编辑 SVG。
 
 英文 speaker notes 给出了每页解释、转场与应避免的过度主张。图示中区分了 paper figure、presenter schematic、published-data aggregation 和 proposed extension。

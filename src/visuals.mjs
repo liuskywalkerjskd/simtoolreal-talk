@@ -7,6 +7,30 @@ export const results=[
  ['Screwdriver','Long','Spin vertical',[20.9,72.1,53.5,74.4,58.1]],['Screwdriver','Long','Spin horizontal',[48.4,86.7,83.3,3.3,86.7]],['Screwdriver','Short','Spin vertical',[15.4,61.5,12.8,100,0]],['Screwdriver','Short','Spin horizontal',[100,100,100,77.8,0]]
 ];
 export const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+// Three-phase overview: task specification and feedback condition a fixed actor.
+export function architecture(){return svg(
+ rect(25,10,1065,112,'#f1f5f3')+txt(45,38,'1  TRAIN ONCE IN SIMULATION',15,T)+
+ txt(45,80,'Primitive tools + random goals',23)+line(375,74,434,74,T,true)+
+ txt(455,80,'Physics + RL',24,T)+line(640,74,735,74,T,true)+txt(755,80,'Reusable LSTM policy',24,T)+
+ g(txt(25,174,'2  SPECIFY A NEW TASK',15,T)+txt(25,214,'Human RGB-D demonstration',25)+
+ txt(25,251,'Grasp box + 6D pose waypoints',21,M)+
+ `<path d="M420 238H540V345H555" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ txt(595,212,'Perception supplies geometry',21,T)+txt(595,246,'The mesh supports live pose tracking',21,M),1)+
+ g(txt(25,310,'3  EXECUTE IN A CLOSED LOOP',15,T)+
+ rect(25,335,365,72)+txt(207,365,'Live tool pose + robot state',22,T,'middle')+txt(207,391,'Tracking and proprioception',17,M,'middle')+
+ line(405,371,555,371,T,true)+rect(570,335,250,72)+txt(695,365,'Fixed LSTM actor',24,T,'middle')+txt(695,391,'Current goal + grasp box',17,M,'middle')+
+ line(835,371,905,371,T,true)+rect(920,335,170,72)+txt(1005,365,'Arm + hand',23,T,'middle')+txt(1005,391,'29 joint targets',17,M,'middle')+
+ `<path d="M995 104H1100V286H695V325" fill="none" stroke="${T}" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arr)"/>`+txt(857,275,'Policy weights',17,M)+
+ `<path d="M1005 414V436H207V414" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+txt(604,460,'Physical feedback',18,M,'middle'),2),480);}
+
+export function controller(){return svg(
+ txt(25,28,'OBSERVATIONS',15,M)+
+ ['Robot proprioception','Current tool pose','Grasp-region box','Current goal pose'].map((s,i)=>rect(25,52+i*71,300,53)+txt(45,86+i*71,s,22,T)).join('')+
+ `<path d="M345 78H382V293M345 150H382M345 221H382M345 292H382M382 185H439" fill="none" stroke="${T}" stroke-width="2.4" marker-end="url(#arr)"/>`+
+ rect(455,110,235,150)+txt(572,157,'LSTM',35,T,'middle')+txt(572,197,'Recurrent memory',21,M,'middle')+txt(572,233,'Partial observations',18,M,'middle')+
+ g(line(705,185,755,185,T,true)+rect(770,130,120,110)+txt(830,193,'MLP',29,T,'middle')+
+ line(905,185,960,185,T,true)+txt(1030,167,'29 joint',23,T,'middle')+txt(1030,201,'targets',23,T,'middle')+txt(1030,238,'60 Hz',21,M,'middle'),1)+
+ txt(455,334,'No image encoder in the deployed motor policy',22,T)+txt(455,367,'Visual modules estimate the state before control',20,M),400);}
 const T='#1d7d76',M='#6c7474',S='#e8f5f3',W='#af673d';
 const txt=(x,y,t,size=22,c='#1a1a1a',anchor='start')=>`<text x="${x}" y="${y}" fill="${c}" font-size="${size}" text-anchor="${anchor}">${t}</text>`;
 const rect=(x,y,w,h,fill=S,stroke='none')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="${fill}" stroke="${stroke}"/>`;
@@ -23,11 +47,11 @@ export function pose(){return svg(
  g(line(590,130,730,210,T,true)+hammer(825,210,30,1.2)+axis(825,210,30)+txt(830,355,'g³  Swing',23,T,'middle'),2)+
  txt(1030,140,'3D',35,T,'middle')+txt(1030,170,'position',18,M,'middle')+txt(1030,236,'3D',35,T,'middle')+txt(1030,266,'orientation',18,M,'middle'),385);}
 export function reduction(){return svg(
- txt(60,35,'TASK SPECIFICATION',16,M)+txt(60,90,'Human tool motion',30)+txt(60,128,'Object pose waypoints',22,T)+
+ txt(60,35,'TASK SPECIFICATION',16,M)+txt(60,90,'Human tool motion',30)+txt(60,128,'6D pose waypoints',22,T)+
  g(rect(415,48,300,120)+txt(565,93,'Reusable goal-reaching',25,T,'middle')+txt(565,129,'RL policy',25,T,'middle')+line(300,110,398,110,T,true),1)+
  g(line(730,110,818,110,T,true)+txt(850,83,'ROBOT EXECUTION',16,M)+txt(850,122,'Arm + hand actions',24),2)+
  line(65,206,1055,206,'#d6e5e1')+txt(60,254,'Specify where the tool goes',23,T)+txt(630,254,'Learn how this robot moves it',23,T)+
- txt(60,294,'Human-to-robot task description',19,M)+txt(630,294,'Contacts and regrasping emerge from RL',19,M),330);}
+ txt(60,294,'3D position + 3D orientation',19,M)+txt(630,294,'Contacts and regrasping emerge from RL',19,M),330);}
 export function primitives(){let s=txt(35,30,'One structural prior, many physical instances',23,M);for(let i=0;i<8;i++){const x=75+i*135,w=12+(i%3)*8,h=80+(i%4)*14;s+=`<g transform="translate(${x},150)">${rect(-w/2,0,w,h,'#c7a77b')}${rect(-18-i%3*11,-25,36+i%3*22,28+i%2*22,'#9ba3a5')}${i===2?'<rect x="-22" y="-5" width="44" height="120" fill="none" stroke="#2ba39b" stroke-width="2" stroke-dasharray="6 5"/>':''}</g>`;}s+=txt(70,327,'Geometry',23,T)+txt(70,359,'Shape + size',19,M)+txt(400,327,'Mass distribution',23,T)+txt(400,359,'Handle / head densities',19,M)+txt(780,327,'Shared policy inputs',23,T)+txt(780,359,'Pose + grasp-region box',19,M);return svg(s,395);}
 export function training(){return svg(
  rect(35,35,295,112)+txt(182,80,'Procedural primitives',24,T,'middle')+txt(182,116,'Geometry + density variation',18,M,'middle')+

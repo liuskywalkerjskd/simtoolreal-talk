@@ -1,6 +1,8 @@
 # SimToolReal Research Seminar
 
-English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 33 slides, plus 6 backup slides. Suggested length: 35–40 minutes plus discussion.
+English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 17 slides, plus 4 backup slides. Suggested length: 20–25 minutes plus discussion.
+
+The concise narrative begins with robot manipulation difficulties, invites discussion of imitation-learning bottlenecks, introduces the object-motion interface on a separate page, and then explains the system and actor. Results and two discussion pages complete the main talk.
 
 ## Open the presentation
 
@@ -10,6 +12,7 @@ English HTML slides following the supplied white-and-teal academic template and 
 - [Speaker notes](speaker_notes.md).
 - [Detailed paper reading and narrative assessment (Chinese)](paper/narrative_assessment_zh.md).
 - [Published per-rollout data transcribed from Table II](paper/real_world_results.csv).
+- [Simplified system architecture (editable SVG)](assets/system_architecture.svg).
 
 No web connection is required to present the HTML deck. Keep `slides.html`, `assets/` and `index.html` together. The ZIP preserves this structure. If local-file media is restricted by your browser, serve this directory using any local static-file server.
 
@@ -17,7 +20,7 @@ No web connection is required to present the HTML deck. Keep `slides.html`, `ass
 
 Right / Space advances a build or a slide. Left reverses a build. `A` reveals the current slide. `F` enters fullscreen. `V` plays or pauses the slide's video. Videos never autoplay and pause when leaving their slide. Native controls remain available. Click a paper figure to enlarge; Escape closes it. The bottom toolbar appears on hover.
 
-Videos are silent excerpts at original speed, at most 30 seconds each. Original source links are on each video slide and in `assets/videos/README.md`. PDF cannot play videos.
+The main talk uses two silent video excerpts at original speed. Three additional clips remain in `assets/videos/` for optional discussion. Original source links are on each video slide and in `assets/videos/README.md`. PDF cannot play videos.
 
 ## Content boundaries
 
