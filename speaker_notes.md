@@ -16,9 +16,9 @@ Source: Presenter brainstorm · Motivated by paper §I–II
 
 ## 3. What makes demonstration-based tool use difficult?
 
-The previous page leaves multiple routes open. Here explain the particular bottlenecks that motivate this paper. Robot action demonstrations directly match the robot but are costly to collect well in dexterous contact tasks. Human video is convenient, yet transferring finger motion does not guarantee feasible contacts. These limitations do not prove imitation learning or VLAs cannot solve the tasks. SimToolReal includes neither a strong learned IL nor a VLA baseline. Its alternative is to keep object-level guidance and learn the motor strategy in simulation.
+The previous page leaves multiple routes open. Use the first image to make the robot-demonstration bottleneck concrete: the illustrated setup needs wrist cameras, a head-mounted display, gloves and handheld controllers. This is one example rather than a universal requirement, but it shows why collecting high-quality dexterous action data can be burdensome. Then reveal the hammer comparison. A human can form a stable wraparound grasp, while directly preserving the same intended hand configuration is not feasible for this dexterous hand because morphology and joint limits differ. The images illustrate the embodiment gap; they are not a controlled benchmark. These limitations do not prove imitation learning or VLAs cannot solve tool use. SimToolReal includes neither a strong learned IL nor a VLA baseline. Its alternative is to retain object-level motion guidance and learn robot-specific contact behavior in simulation.
 
-Source: Paper §I–II · Motivation, not a general failure claim about IL
+Source: Presenter-provided examples · Paper §I–II motivation
 
 ## 4. Tool use as a sequence of pose-reaching problems
 

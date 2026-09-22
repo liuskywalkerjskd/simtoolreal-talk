@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.4.1] - 2026-09-22
+
+### Features
+
+- Rebuild the demonstration-bottleneck slide around three presenter-provided images: a hardware-heavy teleoperation setup and a human-versus-robot hammer-grasp comparison.
+- Simplify the reward page while preserving the construction of smoothness, grasp and goal-reaching terms.
+- Remove repeated source footers, GIF playback metadata and auxiliary fine print from the visible slides.
+- Remove the previous A2A seminar deck from the final design-reference text.
+
+### Design Rationale
+
+- Use concrete visual evidence to explain why dexterous action demonstrations and direct human-to-robot retargeting are difficult.
+- Keep evidence boundaries and detailed equations in the speaker notes so the projected slides remain legible.
+
+### Notes & Caveats
+
+- The three new images are presenter-provided examples, not controlled experimental comparisons from the SimToolReal paper.
+- Full citations and methodological caveats remain available in the English and Chinese speaker notes and the reference backup slide.
+
 ## [3.4.0] - 2026-09-20
 
 ### Features
