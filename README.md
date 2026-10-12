@@ -1,6 +1,6 @@
 # SimToolReal Research Seminar
 
-English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 23 slides, plus 1 reference backup slide. Suggested length: 31–36 minutes including videos, plus discussion.
+English HTML slides following the supplied white-and-teal academic template and the previous A2A presentation. Main talk: 24 slides, plus 1 reference backup slide. Suggested length: 40–45 minutes including videos, plus discussion.
 
 The methodology-focused narrative starts with an open brainstorm, then examines demonstration bottlenecks. It restores the animated 6D pose sequence and explains simulation training before real deployment. The LSTM discussion covers observations, recurrent memory and arm/hand action processing. A looping simulation GIF leads into the gap between simulator ground truth and real state estimation. Six tool categories provide qualitative evidence, followed by one numerical overview and a combined discussion of three research directions.
 
@@ -31,8 +31,9 @@ The cover automatically loops a silent 10-second GIF assembled from the official
 - 6–13: simulation-only pipeline, two-step SAPG explanation, controlled SAPG–PPO comparison, procedural tools, reward construction, LSTM policy, action processing and simulation video.
 - 14–17: ground-truth-to-estimation transition, real pipeline, event-driven goals and inference video.
 - 18–22: six-category video gallery, one quantitative overview, recovery and scope.
-- 23: one primary takeaway with two related research extensions.
-- 24: references and source material. The pose metric remains integrated into the reward-construction page.
+- 23: POISE and HOI-Retarget, with official project demonstrations as looping GIFs.
+- 24: one primary takeaway with two related research extensions.
+- 25: references and source material. The pose metric remains integrated into the reward-construction page.
 
 ## Content boundaries
 
@@ -55,3 +56,7 @@ npm run media:gif
 [Paper](https://arxiv.org/abs/2602.16863v2) · [RSS proceedings](https://www.roboticsproceedings.org/rss22/p151.html) · [Project](https://simtoolreal.github.io/) · [Code](https://github.com/tylerlum/simtoolreal)
 
 This is an independent academic presentation, not an official author deck. See [third-party notices](THIRD_PARTY_NOTICES.md).
+
+## Related work added in October 2026
+
+Slide 23, immediately before the takeaway, presents POISE (*Learning In-Hand Object Reaching to General 6D Poses*, arXiv:2609.13761) and ETH Zürich’s *HOI-Retarget: Contact-Centric Retargeting for Human-Object Interaction* (arXiv:2609.34674). Each column contains the full paper title, an official-project GIF, one conceptual cue, and source links. The HTML loops the GIFs; the PDF uses representative static frames. Exact media sources and excerpt details are in `assets/videos/README.md`.

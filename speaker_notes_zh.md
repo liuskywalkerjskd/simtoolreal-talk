@@ -1,6 +1,6 @@
 # SimToolReal 中文逐页汇报稿
 
-建议时长：正文 31–36 分钟（含循环 GIF 展示），另加讨论。第 1–23 页为正文，第 24 页为来源备份页。每页均与 slides.html 的页码和英文标题严格对应。
+建议时长：正文约 41 分钟（含循环 GIF 展示），另加讨论。第 1–24 页为正文，第 25 页为来源备份页。每页均与 slides.html 的页码和英文标题严格对应。
 
 ## 1. SimToolReal：从工具运动到机器人技能
 
@@ -308,7 +308,23 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** Recovery GIF 会自动循环；观察一次恢复过程后，将注意力转向三条限制。
 
-## 23. 总结与思考：结构化仿真及其两个延伸方向
+## 23. SimToolReal 之后：围绕物体位姿与接触关系的两项工作
+
+**对应英文标题：** Object-centric manipulation beyond SimToolReal
+
+**建议时间：** 约 90 秒
+
+在总结之前，再看两篇 2026 年 9 月的相关工作。它们都把被操作物体放在问题表达的中心，但关注点不同。
+
+左边是 POISE，论文标题是 Learning In-Hand Object Reaching to General 6D Poses。它从已经抓稳物体的状态出发，用手指运动控制物体相对手掌的三维位置和三维朝向。请看锤子在手内的平移与旋转：这里的目标是 palm-relative 6D pose，手腕保持固定。这个真机演示取自官方项目主页，GIF 保持所选片段的原始播放速度。
+
+右边是 ETH Zürich 的 HOI-Retarget，完整标题是 HOI-Retarget: Contact-Centric Retargeting for Human-Object Interaction。它把接触目标锚定在物体坐标系中，在满足机器人运动学约束的同时，保留人和物体在哪里接触、什么时候接触。视频并排展示人类动作及 G1、H2 的重定向结果，还包括多个机器人操作同一个物体。这里展示的是运动学重定向可视化；得到动力学可执行运动还需要后续 refinement。
+
+这两篇与 SimToolReal 的联系，是用物体位姿或物体相对接触关系来组织机器人行为。它们的任务、方法和评价不同，这一页用来展示相近的问题表达思路。由此可以自然引出下一页：可复用技能需要合适的任务接口，位姿之外也可以加入接触关系。
+
+**操作提示：** 左右 GIF 自动循环。先指向锤子的手内运动，再指向人类与两种机器人保持的物体接触；用 object pose 与 object contact 两个关键词过渡到 takeaway。
+
+## 24. 总结与思考：结构化仿真及其两个延伸方向
 
 **对应英文标题：** Structured simulation as a route to reusable robot skills
 
@@ -326,7 +342,7 @@ Hidden state h_t 是当前暴露出来的表示，可以写成 h_t=o_t⊙tanh(c_
 
 **操作提示：** 主结论直接出现；第一次前进键展示 task interface，第二次展示轻量级 VLM。最后用页面底部的边界说明收束。
 
-## 24. 备份：论文、项目视频与相关工作
+## 25. 备份：论文、项目视频与相关工作
 
 **对应英文标题：** References, videos and source material
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased] - 2026-10-11
+
+- Add one related-work slide before the takeaway: POISE and ETH Zürich HOI-Retarget, with full titles, official-project looping GIFs, conceptual captions and source links.
+- Align English/Chinese speaker notes and navigation to 25 slides; update timing and media provenance.
+- Refresh the PDF with static poster frames for both new GIFs.
+
 ## [3.4.1] - 2026-09-22
 
 ### Features

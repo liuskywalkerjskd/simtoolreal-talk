@@ -19,3 +19,7 @@ Local KaTeX CSS and fonts are included under their original license. See `assets
 ## Presenter-created material
 
 SVG diagrams are pedagogical schematics, not measured robot trajectories. The real-world aggregate chart derives from Table II. The baseline chart uses exact Fig. 5 values. The three discussion hypotheses and proposed evaluations are presenter suggestions, not paper findings.
+
+## POISE and HOI-Retarget
+
+Slide 23 uses attributed official project-video excerpts from Lin et al., *Learning In-Hand Object Reaching to General 6D Poses* (https://junxiaolin.github.io/poise-website/), and Shin et al., *HOI-Retarget: Contact-Centric Retargeting for Human-Object Interaction* (https://shinben0327.github.io/hoi-retarget/). The latter includes human source-motion data and retargeted robot visualizations, with original source labels retained. Original authors and dataset owners retain their rights. Inclusion is for an attributed academic seminar; no blanket redistribution license is asserted. See `assets/videos/README.md` for exact sources, excerpts and conversions.

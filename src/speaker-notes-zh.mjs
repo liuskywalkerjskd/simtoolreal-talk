@@ -175,6 +175,16 @@ note('Recovery illustrates feedback, with clear limits','恢复行为体现反�
 但这个结论需要保持条件化：工具必须仍在可达范围内，而且视觉跟踪仍然可靠。训练中 drop 后会 reset，因此视频中的恢复不能等同于系统性鲁棒性评估。方法也没有显式的障碍物规划、功能接触力控制或高层任务 replanning；刚性工具假设和固定目标序列仍然限制了适用范围。`,
 'Recovery GIF 会自动循环；观察一次恢复过程后，将注意力转向三条限制。'),
 
+note('Object-centric manipulation beyond SimToolReal','SimToolReal 之后：围绕物体位姿与接触关系的两项工作','约 90 秒',
+`在总结之前，再看两篇 2026 年 9 月的相关工作。它们都把被操作物体放在问题表达的中心，但关注点不同。
+
+左边是 POISE，论文标题是 Learning In-Hand Object Reaching to General 6D Poses。它从已经抓稳物体的状态出发，用手指运动控制物体相对手掌的三维位置和三维朝向。请看锤子在手内的平移与旋转：这里的目标是 palm-relative 6D pose，手腕保持固定。这个真机演示取自官方项目主页，GIF 保持所选片段的原始播放速度。
+
+右边是 ETH Zürich 的 HOI-Retarget，完整标题是 HOI-Retarget: Contact-Centric Retargeting for Human-Object Interaction。它把接触目标锚定在物体坐标系中，在满足机器人运动学约束的同时，保留人和物体在哪里接触、什么时候接触。视频并排展示人类动作及 G1、H2 的重定向结果，还包括多个机器人操作同一个物体。这里展示的是运动学重定向可视化；得到动力学可执行运动还需要后续 refinement。
+
+这两篇与 SimToolReal 的联系，是用物体位姿或物体相对接触关系来组织机器人行为。它们的任务、方法和评价不同，这一页用来展示相近的问题表达思路。由此可以自然引出下一页：可复用技能需要合适的任务接口，位姿之外也可以加入接触关系。`,
+'左右 GIF 自动循环。先指向锤子的手内运动，再指向人类与两种机器人保持的物体接触；用 object pose 与 object contact 两个关键词过渡到 takeaway。'),
+
 note('Structured simulation as a route to reusable robot skills','总结与思考：结构化仿真及其两个延伸方向','约 210 秒',
 `最后把三个思考收束在同一页。它们是从论文出发的 presenter hypotheses，不是作者已经验证的结果。其中第一点是整场汇报最重要的 takeaway，后两点是沿着这个判断继续展开的研究方向。
 

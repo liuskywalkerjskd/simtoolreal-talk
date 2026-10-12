@@ -1,6 +1,6 @@
 # SimToolReal · English Speaker Notes
 
-Suggested duration: 31–36 minutes including looping GIFs, plus discussion. Slides 1–23 are the main talk. Slide 24 is the reference backup. Use Right / Space for step reveals, A to reveal a whole page, and F for fullscreen. Experiment GIFs loop automatically, are silent and preserve the original playback speed.
+Suggested duration: 40–45 minutes including looping GIFs, plus discussion. Slides 1–24 are the main talk. Slide 25 is the reference backup. Use Right / Space for step reveals, A to reveal a whole page, and F for fullscreen. Experiment GIFs loop automatically, are silent and preserve the original playback speed.
 
 ## 1. SimToolReal
 
@@ -130,17 +130,23 @@ Source: Real robot · Presenter aggregation of Table II · 20 trials per categor
 
 ## 22. Recovery illustrates feedback, with clear limits
 
-The recovery GIF loops automatically and brings the emphasis back from average performance to the role of feedback. The authors observe regrasp attempts even though training resets after drops. Keep the claim conditional: useful state feedback and a reachable object remain necessary. The policy does not explicitly plan around scene obstacles or optimize functional contact forces. Rigid tools and a fixed goal sequence also limit the scope. These qualifications motivate the three research inspirations on the next page. A selected recovery clip is not a systematic robustness evaluation.
+The recovery GIF loops automatically and brings the emphasis back from average performance to the role of feedback. The authors observe regrasp attempts even though training resets after drops. Keep the claim conditional: useful state feedback and a reachable object remain necessary. The policy does not explicitly plan around scene obstacles or optimize functional contact forces. Rigid tools and a fixed goal sequence also limit the scope. These qualifications lead into related object-centric work and the closing research reflections. A selected recovery clip is not a systematic robustness evaluation.
 
 Source: Looping GIF converted from the official recovery video · Paper §IV-A and §V · Qualitative behavior
 
-## 23. Structured simulation as a route to reusable robot skills
+## 23. Object-centric manipulation beyond SimToolReal
+
+Two September 2026 works provide related object-centric perspectives after SimToolReal. POISE (Lin et al.), Learning In-Hand Object Reaching to General 6D Poses, starts from an existing grasp and controls the object's palm-relative translation and orientation through finger motion. Watch the real hammer move within the hand while the wrist stays fixed. The GIF shows the first 18 seconds of the official user-specified hammer demonstration at its source playback speed. HOI-Retarget (Shin et al., ETH Zürich), Contact-Centric Retargeting for Human-Object Interaction, anchors labeled contact targets in the object frame and optimizes robot motion to preserve contact location and timing. The official 15-second teaser compares human motions with G1 and H2 retargets, including shared-object interactions. These are kinematic retargeting visualizations, not real-robot execution; downstream dynamic refinement is a separate step. The common thread is choosing object pose or object-relative interaction as the interface across embodiments. Their objectives and evaluation settings differ, so this page presents related perspectives rather than a quantitative comparison or a claim that either directly extends SimToolReal. Transition to the takeaway: a useful task interface can express object motion, contact, or both.
+
+Source: Lin et al. · arXiv:2609.13761 · junxiaolin.github.io/poise-website/ | Shin et al. · arXiv:2609.34674 · shinben0327.github.io/hoi-retarget/ · Official project videos
+
+## 24. Structured simulation as a route to reusable robot skills
 
 Close with the user's three inspirations in one hierarchy rather than a Discussion page followed by a repetitive Takeaway. The first point is the main conclusion: structured simulation and reusable motor controllers may complement scaling large action models. SimToolReal establishes transfer in a structured setup, not autonomous online skill acquisition in the wild. Then reveal two extensions. The deeper idea behind the second point is to search for sufficient task interfaces. Rigid SE(3) poses will not capture articulated state, deformation, force or all scene constraints. The third point assigns lightweight VLMs to semantic setup, tool selection and subgoal generation, while metric pose tracking remains geometrically grounded. Replacing the tracker directly would require evidence on pose error, latency and failure behavior. A controlled follow-up could freeze the actor and compare manual prompts with VLM region proposals, measuring setup effort and functional completion.
 
 Source: Presenter discussion · Main reflection and two research extensions
 
-## 24. References, videos and source material
+## 25. References, videos and source material
 
 Paper figures and project videos retain their original authorship. Custom diagrams are explanatory schematics. The SAPG page simplifies the leader–follower data flow from Singla et al., ICML 2024. Real-world aggregate charts derive from the published Table II data, provided in CSV form alongside this deck. The discussion section explicitly labels untested extensions. The package also contains English speaker notes and a detailed Chinese narrative assessment.
 
