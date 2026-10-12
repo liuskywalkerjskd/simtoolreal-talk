@@ -20,17 +20,17 @@ The previous page leaves multiple routes open. Use the first image to make the r
 
 Source: Presenter-provided examples · Paper §I–II motivation
 
-## 4. Tool use as a sequence of pose-reaching problems
-
-This is the conceptual pivot. The human provides a sequence of rigid-tool configurations. A goal-conditioned controller learns how to move the tool between configurations using this robot's arm and hand. It is related to functional or object-centric retargeting, but the controller is trained in advance on randomized primitives rather than trained for each demonstration. The arrow from goals to policy denotes conditioning, not policy fine-tuning.
-
-Source: Paper §III-A · Presenter schematic
-
-## 5. A 6D pose specifies position and orientation
+## 4. A 6D pose specifies position and orientation
 
 A rigid object's pose has three translational and three rotational degrees of freedom. It need not be encoded as six Euler-angle coordinates; the paper uses keypoint-based features and distances. Reveal lift, reorientation and swing in order. This schematic is a task interface, not a measured demonstration. At runtime the policy receives the current goal. The goal sequence is spatial and event-driven, so the robot does not have to reproduce the human's timing.
 
 Source: Paper §III-A · Illustrative pose sequence, not experimental data
+
+## 5. Tool use as a sequence of pose-reaching problems
+
+This is the conceptual pivot. The human provides a sequence of rigid-tool configurations. A goal-conditioned controller learns how to move the tool between configurations using this robot's arm and hand. It is related to functional or object-centric retargeting, but the controller is trained in advance on randomized primitives rather than trained for each demonstration. The arrow from goals to policy denotes conditioning, not policy fine-tuning.
+
+Source: Paper §III-A · Presenter schematic
 
 ## 6. Training pipeline: learn pose reaching through interaction
 

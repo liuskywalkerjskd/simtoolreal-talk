@@ -25,12 +25,6 @@ note('What makes demonstration-based tool use difficult?','为什么工具使用
 这里需要控制结论边界：论文并没有证明 imitation learning 或 VLA 不适合工具使用，也没有和强 IL/VLA baseline 做系统比较。它提出的是另一种分工方式——示范只描述工具怎么动，机器人如何实现这段运动则交给仿真 RL 学习。`,
 '第一次揭示左侧遥操作设备；第二次揭示右侧人手与灵巧手对比；第三次出现底部结论。'),
 
-note('Tool use as a sequence of pose-reaching problems','把工具使用转化为连续的位姿到达问题','约 90 秒',
-`这就是全文最重要的抽象。作者不要求人类演示机器人手指应该怎样运动，而是从演示中提取刚性工具的一系列目标位姿。策略每次接收当前工具状态和下一个目标位姿，然后输出机器人 7 个手臂关节与 22 个手部关节的控制目标。
-
-这样，任务层只规定“工具应该到哪里、朝向哪里”，而抓取方式、手内调整和机器人自身的接触策略由 RL 在仿真中发现。它与 object-centric 或 functional retargeting 有联系，但这里的控制器在看到测试演示之前就已经训练完毕；目标序列只是 policy conditioning，不会触发新的 policy fine-tuning。`,
-'讲清楚 goal conditioning 与 policy training 的区别。'),
-
 note('A 6D pose specifies position and orientation','6D 位姿同时描述位置与朝向','约 90 秒',
 `一个刚性工具的位姿包含三维位置和三维朝向。这里写成 SE(3) 中的旋转矩阵 R 和位置 p，而不必把“6D”理解成一定使用六个欧拉角。
 
@@ -38,6 +32,12 @@ note('A 6D pose specifies position and orientation','6D 位姿同时描述位置
 
 需要说明，这个动画是为了帮助理解任务接口，并不是论文中的定量实验轨迹。`,
 '依次播放 lift、reorient、swing 三个构建步骤，让听众先观察位置变化，再观察朝向变化。'),
+
+note('Tool use as a sequence of pose-reaching problems','把工具使用转化为连续的位姿到达问题','约 90 秒',
+`这就是全文最重要的抽象。作者不要求人类演示机器人手指应该怎样运动，而是从演示中提取刚性工具的一系列目标位姿。策略每次接收当前工具状态和下一个目标位姿，然后输出机器人 7 个手臂关节与 22 个手部关节的控制目标。
+
+这样，任务层只规定“工具应该到哪里、朝向哪里”，而抓取方式、手内调整和机器人自身的接触策略由 RL 在仿真中发现。它与 object-centric 或 functional retargeting 有联系，但这里的控制器在看到测试演示之前就已经训练完毕；目标序列只是 policy conditioning，不会触发新的 policy fine-tuning。`,
+'讲清楚 goal conditioning 与 policy training 的区别。'),
 
 note('Training pipeline: learn pose reaching through interaction','仿真训练 Pipeline：通过交互学习位姿到达','约 120 秒',
 `这一页只讲仿真训练，不包含真实部署中的 RGB-D 和视觉模型。左侧是程序化生成的工具、随机物理参数、初始状态和随机目标位姿。actor 接收受限且带噪声、带延迟的 observation，输出手臂和灵巧手动作。物理仿真器推进环境，计算下一状态与 reward，再形成闭环数据。

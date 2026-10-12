@@ -27,7 +27,7 @@ The cover automatically loops a silent 10-second GIF assembled from the official
 ## Talk map
 
 - 1–3: cover, open brainstorm and demonstration bottlenecks.
-- 4–5: pose-reaching abstraction and animated position/orientation sequence.
+- 4–5: animated position/orientation sequence, then the pose-reaching abstraction.
 - 6–13: simulation-only pipeline, two-step SAPG explanation, controlled SAPG–PPO comparison, procedural tools, reward construction, LSTM policy, action processing and simulation video.
 - 14–17: ground-truth-to-estimation transition, real pipeline, event-driven goals and inference video.
 - 18–22: six-category video gallery, one quantitative overview, recovery and scope.
